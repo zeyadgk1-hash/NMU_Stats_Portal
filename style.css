@@ -26,7 +26,8 @@ body {
     background-color: var(--bg);
     color: var(--text-main);
     line-height: 1.6;
-    padding-top: 80px; /* مسافة أمان للنابار */
+    margin: 0;
+    padding: 0;
 }
 
 /* --- النابار (Glassmorphism Navbar) --- */
@@ -37,7 +38,7 @@ body {
     padding: 12px 0;
     position: fixed;
     top: 0; width: 100%; z-index: 5000;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
 }
 
 .nav-container {
@@ -55,11 +56,12 @@ body {
 /* --- الهيرو سكشن (Modern Gradient) --- */
 .hero-section {
     background: radial-gradient(circle at top right, var(--primary), #1e293b);
-    padding: 60px 20px 100px;
+    padding: 40px 20px 60px;
     text-align: center;
     color: var(--white);
     clip-path: ellipse(150% 100% at 50% 0%);
-    margin-bottom: -40px;
+    position: relative;
+    z-index: 1;
 }
 
 .hero-section h1 {
@@ -71,8 +73,10 @@ body {
 /* --- الحاوية الرئيسية --- */
 .container {
     max-width: 1100px;
-    margin: 0 auto 60px;
+    margin: -30px auto 60px;
     padding: 0 15px;
+    position: relative;
+    z-index: 2;
 }
 
 .main-grid {
@@ -557,3 +561,4 @@ body {
     box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
 }
 
+    
