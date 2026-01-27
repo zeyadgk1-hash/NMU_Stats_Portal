@@ -7,12 +7,62 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-        body { padding-top: 100px; }
-        .hero-section { padding: 100px 20px; margin-bottom: 20px; }
-        .hero-section h1 { margin-bottom: 15px; font-size: 3rem; }
-        .container { margin-top: -60px; position: relative; z-index: 10; }
+        /* إعادة ضبط كاملة */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         
-        /* ستايل شريط التقدم الحقيقي */
+        body {
+            padding-top: 0;
+            margin: 0;
+            background: var(--bg);
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        /* الهيدر مثل الصورة */
+        .hero-section { 
+            padding: 80px 20px 60px;
+            margin-top: 60px; /* مسافة من النافبار */
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            text-align: center;
+            color: white;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .hero-section h1 {
+            margin-bottom: 5px;
+            font-size: 3rem;
+            font-weight: 900;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #d4af37; /* لون ذهبي */
+            margin-bottom: 15px;
+        }
+        
+        .hero-description {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+            color: #e2e8f0;
+        }
+        
+        .container { 
+            margin-top: -40px; 
+            position: relative; 
+            z-index: 10;
+            padding-bottom: 40px;
+        }
+        
+        /* شريط التقدم الحقيقي */
         .progress-container {
             background: #e2e8f0;
             border-radius: 20px;
@@ -20,17 +70,32 @@
             margin: 15px 0 5px 0;
             width: 100%;
             overflow: hidden;
-            border: 1px solid rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.1);
         }
         #index-progress-bar {
-            width: 0%; /* البداية صفر ويتحرك بالـ JS */
+            width: 0%;
             height: 100%;
             background: linear-gradient(90deg, #d4af37, #b8860b);
             transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+            border-radius: 20px;
         }
 
-        /* ستايل إضافي للمواد المغلقة */
+        /* كروت المواد */
+        .subject-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s;
+            text-align: center;
+        }
+        
+        .subject-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        /* باقي التنسيقات */
         .card-disabled {
             opacity: 0.7;
             filter: grayscale(0.6);
@@ -41,12 +106,105 @@
             background: #64748b !important;
         }
         
-        /* تنسيق شريط التقدم للمواد المعطلة */
-        .subject-card.card-disabled .progress-bar {
-            background: #e2e8f0;
+        /* النافبار يفضل ثابت */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
         }
-        .subject-card.card-disabled .progress-bar .progress {
-            background: #94a3b8;
+        
+        /* ستايلات المودال */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 9000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .modal-overlay.show {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 25px;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            animation: slideUp 0.4s ease;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 30px;
+            color: #64748b;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-weight: bold;
+        }
+        
+        .modal-options {
+            margin-top: 30px;
+        }
+        
+        .option-item {
+            display: flex;
+            align-items: center;
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 18px;
+            text-decoration: none;
+            margin-bottom: 15px;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .option-item:hover {
+            background: white;
+            border-color: #0ea5e9;
+            transform: translateX(-10px);
+        }
+        
+        .opt-icon {
+            font-size: 2rem;
+            margin-left: 15px;
+        }
+        
+        .opt-info {
+            text-align: right;
+        }
+        
+        .opt-info h4 {
+            color: #0f172a;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        
+        .opt-info span {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
     </style>
 </head>
@@ -65,73 +223,84 @@
     </nav>
 
     <header class="hero-section">
-        <h1>اهلا بيك صديقي البائس</h1>
-        <p style="font-size: 1.2rem; opacity: 0.9;">اختر المادة الدراسية لتبدأ المذاكرة والتدريب</p>
+        <h1>اهلا بيك</h1>
+        <div class="hero-subtitle">NMU - Computer Science 2026</div>
+        <p class="hero-description">اختر المادة الدراسية لتبدأ المذاكرة والتدريب</p>
     </header>
 
     <main class="container">
         <div class="main-grid">
             
-            <!-- مادة الاحتمالات والإحصاء (المادة النشطة) -->
+            <!-- مادة الاحتمالات والإحصاء -->
             <div class="subject-card">
-                <span class="badge" style="background: var(--success);">متاح الآن 🔥</span>
-                <div class="card-icon">📊</div>
-                <h3>الاحتمالات والإحصاء</h3>
-                <p>Probability & Statistics</p>
+                <span class="badge" style="background: #22c55e; color: white; padding: 6px 15px; border-radius: 20px; font-size: 0.85rem; font-weight: 700;">متاح الآن 🔥</span>
+                <div class="card-icon" style="font-size: 3rem; margin: 15px 0;">📊</div>
+                <h3 style="color: #0f172a; margin-bottom: 5px;">الاحتمالات والإحصاء</h3>
+                <p style="color: #64748b; margin-bottom: 20px;">Probability & Statistics</p>
                 
-                <!-- شريط التقدم الحقيقي -->
+                <!-- شريط التقدم -->
                 <div class="progress-container">
                     <div id="index-progress-bar"></div>
                 </div>
-                <p id="progress-text" style="font-size: 0.85rem; font-weight: 800; color: #0f172a; margin-bottom: 15px;">0% مكتمل</p>
+                <p id="progress-text" style="font-size: 0.9rem; font-weight: 800; color: #0f172a; margin: 10px 0 20px 0;">0% مكتمل</p>
 
-                <a href="javascript:void(0)" onclick="toggleModal()" class="btn-enter">دخول المادة</a>
+                <a href="javascript:void(0)" onclick="toggleModal()" class="btn-enter" style="display: block; background: #0f172a; color: white; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 700; text-align: center;">دخول المادة</a>
             </div>
 
             <!-- المواد المعطلة -->
             <div class="subject-card card-disabled">
-                <span class="badge badge-soon">قريباً ⏳</span>
-                <div class="card-icon">💻</div>
-                <h3>البرمجة كائنية التوجه</h3>
-                <p>Object Oriented Programming</p>
-                <div class="progress-bar"><div class="progress" style="width: 0%"></div></div>
-                <a href="#" class="btn-enter disabled">قيد التجهيز</a>
+                <span class="badge" style="background: #64748b; color: white; padding: 6px 15px; border-radius: 20px; font-size: 0.85rem; font-weight: 700;">قريباً ⏳</span>
+                <div class="card-icon" style="font-size: 3rem; margin: 15px 0;">💻</div>
+                <h3 style="color: #0f172a; margin-bottom: 5px;">البرمجة كائنية التوجه</h3>
+                <p style="color: #64748b; margin-bottom: 20px;">Object Oriented Programming</p>
+                <div style="background: #e2e8f0; height: 8px; border-radius: 10px; margin: 20px 0;">
+                    <div style="background: #94a3b8; height: 100%; width: 0%; border-radius: 10px;"></div>
+                </div>
+                <a href="#" class="btn-enter disabled" style="display: block; background: #94a3b8; color: white; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 700; text-align: center; cursor: not-allowed;">قيد التجهيز</a>
             </div>
 
             <div class="subject-card card-disabled">
-                <span class="badge badge-soon">قريباً ⏳</span>
-                <div class="card-icon">⚡</div>
-                <h3>الدوائر الكهربية والإلكترونية</h3>
-                <p>Electric & Electronic circuits</p>
-                <div class="progress-bar"><div class="progress" style="width: 0%"></div></div>
-                <a href="#" class="btn-enter disabled">قيد التجهيز</a>
+                <span class="badge" style="background: #64748b; color: white; padding: 6px 15px; border-radius: 20px; font-size: 0.85rem; font-weight: 700;">قريباً ⏳</span>
+                <div class="card-icon" style="font-size: 3rem; margin: 15px 0;">⚡</div>
+                <h3 style="color: #0f172a; margin-bottom: 5px;">الدوائر الكهربية والإلكترونية</h3>
+                <p style="color: #64748b; margin-bottom: 20px;">Electric & Electronic circuits</p>
+                <div style="background: #e2e8f0; height: 8px; border-radius: 10px; margin: 20px 0;">
+                    <div style="background: #94a3b8; height: 100%; width: 0%; border-radius: 10px;"></div>
+                </div>
+                <a href="#" class="btn-enter disabled" style="display: block; background: #94a3b8; color: white; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 700; text-align: center; cursor: not-allowed;">قيد التجهيز</a>
             </div>
 
             <div class="subject-card card-disabled">
-                <span class="badge badge-soon">قريباً ⏳</span>
-                <div class="card-icon">📐</div>
-                <h3>الرياضيات II</h3>
-                <p>Mathematics II</p>
-                <div class="progress-bar"><div class="progress" style="width: 0%"></div></div>
-                <a href="#" class="btn-enter disabled">قيد التجهيز</a>
+                <span class="badge" style="background: #64748b; color: white; padding: 6px 15px; border-radius: 20px; font-size: 0.85rem; font-weight: 700;">قريباً ⏳</span>
+                <div class="card-icon" style="font-size: 3rem; margin: 15px 0;">📐</div>
+                <h3 style="color: #0f172a; margin-bottom: 5px;">الرياضيات II</h3>
+                <p style="color: #64748b; margin-bottom: 20px;">Mathematics II</p>
+                <div style="background: #e2e8f0; height: 8px; border-radius: 10px; margin: 20px 0;">
+                    <div style="background: #94a3b8; height: 100%; width: 0%; border-radius: 10px;"></div>
+                </div>
+                <a href="#" class="btn-enter disabled" style="display: block; background: #94a3b8; color: white; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 700; text-align: center; cursor: not-allowed;">قيد التجهيز</a>
             </div>
 
             <div class="subject-card card-disabled">
-                <span class="badge badge-soon">قريباً ⏳</span>
-                <div class="card-icon">👔</div>
-                <h3>مقدمة في الإدارة</h3>
-                <p>Introduction to management</p>
-                <div class="progress-bar"><div class="progress" style="width: 0%"></div></div>
-                <a href="#" class="btn-enter disabled">قيد التجهيز</a>
+                <span class="badge" style="background: #64748b; color: white; padding: 6px 15px; border-radius: 20px; font-size: 0.85rem; font-weight: 700;">قريباً ⏳</span>
+                <div class="card-icon" style="font-size: 3rem; margin: 15px 0;">👔</div>
+                <h3 style="color: #0f172a; margin-bottom: 5px;">مقدمة في الإدارة</h3>
+                <p style="color: #64748b; margin-bottom: 20px;">Introduction to management</p>
+                <div style="background: #e2e8f0; height: 8px; border-radius: 10px; margin: 20px 0;">
+                    <div style="background: #94a3b8; height: 100%; width: 0%; border-radius: 10px;"></div>
+                </div>
+                <a href="#" class="btn-enter disabled" style="display: block; background: #94a3b8; color: white; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 700; text-align: center; cursor: not-allowed;">قيد التجهيز</a>
             </div>
 
             <div class="subject-card card-disabled">
-                <span class="badge badge-soon">قريباً ⏳</span>
-                <div class="card-icon">📜</div>
-                <h3>التذوق الأدبي</h3>
-                <p>Literature Appreciation</p>
-                <div class="progress-bar"><div class="progress" style="width: 0%"></div></div>
-                <a href="#" class="btn-enter disabled">قيد التجهيز</a>
+                <span class="badge" style="background: #64748b; color: white; padding: 6px 15px; border-radius: 20px; font-size: 0.85rem; font-weight: 700;">قريباً ⏳</span>
+                <div class="card-icon" style="font-size: 3rem; margin: 15px 0;">📜</div>
+                <h3 style="color: #0f172a; margin-bottom: 5px;">التذوق الأدبي</h3>
+                <p style="color: #64748b; margin-bottom: 20px;">Literature Appreciation</p>
+                <div style="background: #e2e8f0; height: 8px; border-radius: 10px; margin: 20px 0;">
+                    <div style="background: #94a3b8; height: 100%; width: 0%; border-radius: 10px;"></div>
+                </div>
+                <a href="#" class="btn-enter disabled" style="display: block; background: #94a3b8; color: white; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 700; text-align: center; cursor: not-allowed;">قيد التجهيز</a>
             </div>
 
         </div>
@@ -141,8 +310,8 @@
     <div id="subjectModal" class="modal-overlay">
         <div class="modal-content">
             <span class="close-btn" onclick="toggleModal()">&times;</span>
-            <h2>اختر وجهتك يا وحش 🚀</h2>
-            <p>مادة الاحتمالات والإحصاء</p>
+            <h2>اختر وجهتك يا بشمهندس 🚀</h2>
+            <p style="color: #64748b; margin-bottom: 30px;">مادة الاحتمالات والإحصاء</p>
             
             <div class="modal-options">
                 <a href="statistics.html" class="option-item">
@@ -153,48 +322,43 @@
                     </div>
                 </a>
 
-                <a href="exercises.html" class="option-item accent">
-                    <div class="opt-icon">📝</div>
-                    <div class="opt-info">
-                        <h4>بنك التدريبات</h4>
-                        <span>اختبارات تفاعلية ومراجعات شاملة</span>
-                    </div>
-                </a>
+                <a href="exercises.html" class="option-item" style="background: linear-gradient(135deg, #d4af37, #b8860b);">
+    <div class="opt-icon" style="color: #003366; font-size: 2.2rem;">📝</div>
+    <div class="opt-info">
+        <h4 style="color: #003366; font-weight: 900; font-size: 1.3rem;">بنك التدريبات</h4>
+        <span style="color: #1e293b; font-weight: 800; font-size: 1rem;">اختبارات تفاعلية ومراجعات شاملة</span>
+    </div>
+</a>
             </div>
         </div>
     </div>
 
-    <footer class="footer">
+    <footer class="footer" style="text-align: center; padding: 20px; color: #64748b; font-size: 0.9rem; background: #f8fafc; margin-top: 40px;">
         <p>جميع الحقوق محفوظة معرفش فين هما بيقولوا كدة</p>
     </footer>
 
     <script>
-        // وظيفة تحديث شريط التقدم
+        // تأكد من تحميل الخط أولاً
+        document.fonts.ready.then(function() {
+            updateIndexProgress();
+        });
+
         function updateIndexProgress() {
             const bar = document.getElementById('index-progress-bar');
             const text = document.getElementById('progress-text');
-            
-            // اجمالي المهام (عد كل أزرار الشرح والتيتوريال والفيديو في الصفحة التانية)
             const totalTasks = 29; 
-            
             const completed = JSON.parse(localStorage.getItem('stats_progress')) || [];
             let percentage = Math.round((completed.length / totalTasks) * 100);
             if (percentage > 100) percentage = 100;
 
-            if (bar) {
-                // أنيميشن بعد 300 مللي ثانية من فتح الصفحة
+            if (bar && text) {
                 setTimeout(() => {
                     bar.style.width = percentage + '%';
-                    if (text) text.innerText = percentage + '% مكتمل';
-                }, 300);
+                    text.innerText = percentage + '% مكتمل';
+                }, 500);
             }
         }
 
-        // تشغيل الوظيفة عند التحميل وعند العودة للصفحة
-        window.addEventListener('load', updateIndexProgress);
-        window.addEventListener('pageshow', updateIndexProgress);
-
-        // وظيفة المودال
         function toggleModal() {
             const modal = document.getElementById('subjectModal');
             if (modal.classList.contains('show')) {
@@ -206,11 +370,13 @@
             }
         }
 
-        // إغلاق المودال عند النقر خارج المحتوى
         window.onclick = function(event) {
             const modal = document.getElementById('subjectModal');
             if (event.target == modal) toggleModal();
         }
+
+        window.addEventListener('load', updateIndexProgress);
+        window.addEventListener('pageshow', updateIndexProgress);
     </script>
 </body>
 </html>
