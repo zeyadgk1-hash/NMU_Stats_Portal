@@ -6,6 +6,341 @@
     <title>محتوى مادة الإحصاء | جامعة المنصورة الجديدة</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* إعادة ضبط كاملة */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            padding-top: 0;
+            margin: 0;
+            background: var(--bg);
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        /* النافبار ثابت */
+        .navbar {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 12px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .uni-name { font-weight: 900; font-size: 1.1rem; color: white; }
+        .app-tag { font-size: 0.8rem; color: #0ea5e9; font-weight: 700; }
+        
+        /* الهيدر */
+        .container {
+            max-width: 1200px;
+            margin: 100px auto 60px;
+            padding: 0 20px;
+        }
+        
+        /* العنوان */
+        .section-header-container {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 10px 0 20px 0;
+            border-bottom: 3px solid #d4af37;
+            width: 100%;
+        }
+
+        .section-title-main {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #0f172a;
+            line-height: 1.2;
+        }
+
+        .section-title-sub {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #64748b;
+            margin-top: 5px;
+        }
+        
+        /* الجريد */
+        .main-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        /* كروت المحاضرات */
+        .subject-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+            text-align: center;
+        }
+        
+        .subject-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(14, 165, 233, 0.15);
+            border-color: #0ea5e9;
+        }
+        
+        /* البادج */
+        .badge {
+            display: inline-block;
+            background: #0f172a;
+            color: #d4af37;
+            padding: 6px 18px;
+            border-radius: 50px;
+            font-weight: 900;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+        }
+        
+        /* عنوان المحاضرة */
+        .subject-card h3 {
+            color: #0f172a;
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 25px;
+            line-height: 1.4;
+        }
+        
+        /* أزرار المحتوى */
+        .content-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .btn-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 8px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            min-width: 90px;
+            max-width: 120px;
+        }
+        
+        /* ألوان الأزرار */
+        .btn-content.btn-pdf {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444 !important;
+        }
+        .btn-content.btn-pdf:hover {
+            background: #ef4444;
+            color: white !important;
+            box-shadow: 0 8px 20px rgba(239, 68, 68, 0.3);
+        }
+        
+        .btn-content.btn-tutorial {
+            background: rgba(139, 92, 246, 0.1);
+            color: #8b5cf6 !important;
+        }
+        .btn-content.btn-tutorial:hover {
+            background: #8b5cf6;
+            color: white !important;
+            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
+        }
+        
+        .btn-content.btn-video {
+            background: rgba(255, 0, 0, 0.05);
+            color: #ff0000 !important;
+        }
+        .btn-content.btn-video:hover {
+            background: #ff0000;
+            color: white !important;
+            box-shadow: 0 8px 20px rgba(255, 0, 0, 0.3);
+        }
+        
+        .btn-content.btn-disabled {
+            background: #e2e8f0;
+            color: #94a3b8 !important;
+            cursor: not-allowed;
+        }
+        
+        /* أيقونة الزرار */
+        .btn-content span {
+            font-size: 1.1rem;
+            transition: transform 0.3s ease;
+        }
+        .btn-content:hover span {
+            transform: rotate(10deg) scale(1.1);
+        }
+        
+        /* مراجعة الميدترم */
+        .review-notice {
+            margin-top: 15px;
+            padding: 15px;
+            background: linear-gradient(135deg, #fffbeb, #fef3c7);
+            border-radius: 15px;
+            border-right: 5px solid #f59e0b;
+        }
+        
+        .review-notice p {
+            color: #92400e;
+            font-size: 0.95rem;
+            font-weight: 700;
+            line-height: 1.6;
+        }
+        
+        /* الفوتر */
+        .footer {
+            text-align: center;
+            padding: 25px;
+            color: #64748b;
+            font-size: 0.9rem;
+            background: #f8fafc;
+            margin-top: 60px;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        /* زر الرجوع للرئيسية */
+        .btn-enter {
+            background: rgba(212, 175, 55, 0.2);
+            color: #b8860b;
+            padding: 8px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            transition: all 0.3s;
+        }
+        
+        .btn-enter:hover {
+            background: #d4af37;
+            color: #0f172a;
+            transform: scale(1.05);
+        }
+        
+        /* تحسينات للموبايل */
+        @media (max-width: 768px) {
+            .container {
+                margin: 90px auto 40px;
+                padding: 0 15px;
+            }
+            
+            .section-title-main {
+                font-size: 1.8rem;
+            }
+            
+            .section-title-sub {
+                font-size: 1.5rem;
+            }
+            
+            .main-grid {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .subject-card {
+                width: 100%;
+                padding: 20px;
+            }
+            
+            .content-actions {
+                flex-direction: row;
+                justify-content: space-between;
+                gap: 8px;
+            }
+            
+            .btn-content {
+                min-width: 80px;
+                max-width: none;
+                flex: 1;
+                padding: 10px 6px;
+                font-size: 0.8rem;
+            }
+            
+            .btn-content span {
+                font-size: 1rem;
+            }
+            
+            .subject-card h3 {
+                font-size: 1.2rem;
+            }
+            
+            .badge {
+                font-size: 0.85rem;
+                padding: 5px 15px;
+            }
+        }
+        
+        /* لشاشات صغيرة جداً */
+        @media (max-width: 400px) {
+            .content-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .btn-content {
+                width: 100%;
+                max-width: 100%;
+                padding: 12px;
+            }
+            
+            .nav-container {
+                padding: 0 10px;
+            }
+            
+            .uni-name {
+                font-size: 0.9rem;
+            }
+            
+            .app-tag {
+                font-size: 0.7rem;
+            }
+            
+            .btn-enter {
+                padding: 6px 15px;
+                font-size: 0.85rem;
+            }
+        }
+        
+        /* ترتيب المحاضرات في الموبايل */
+        @media (max-width: 768px) {
+            .subject-card:nth-child(1) { order: 1; }
+            .subject-card:nth-child(2) { order: 2; }
+            .subject-card:nth-child(3) { order: 3; }
+            .subject-card:nth-child(4) { order: 4; }
+            .subject-card:nth-child(5) { order: 5; }
+            .subject-card:nth-child(6) { order: 6; }
+            .subject-card:nth-child(7) { order: 7; }
+            .subject-card:nth-child(8) { order: 8; }
+            .subject-card:nth-child(9) { order: 9; }
+            .subject-card:nth-child(10) { order: 10; }
+        }
+    </style>
 </head>
 <body class="content-page">
     <nav class="navbar">
@@ -14,12 +349,16 @@
                 <span class="uni-name">جامعة المنصورة الجديدة</span>
                 <span class="app-tag">مادة الاحتمالات والإحصاء</span>
             </div>
-            <a href="index.html" class="btn-enter" style="background: rgba(255,255,255,0.2); padding: 5px 15px;">الرئيسية</a>
+            <a href="index.html" class="btn-enter">🏠 الرئيسية</a>
         </div>
     </nav>
 
     <main class="container">
-        <h2 class="section-header">قائمة المحاضرات والتمارين</h2>
+        <div class="section-header-container">
+            <div class="section-title-main">📚 قائمة المحاضرات</div>
+            <div class="section-title-sub">والتمارين</div>
+        </div>
+        
         <div class="main-grid">
             
             <div class="subject-card">
@@ -72,11 +411,11 @@
                 </div>
             </div>
 
-            <div class="subject-card" style="border: 2px solid var(--accent-color);">
-                <span class="badge" style="background: var(--accent-color);">Review</span>
-                <h3>Midterm Review</h3>
-                <div class="review-notice" style="margin-top: 15px; padding: 10px; background: #fffbeb; border-radius: 10px;">
-                    <p style="font-size: 0.9rem;"><b>مراجعة شاملة للميدترم</b><br>المحاضرة السادسة مراجعة للميدترم وسيتم اضافة اسئلة الميدترم قريباً</p>
+            <div class="subject-card" style="border: 2px solid #d4af37; background: linear-gradient(135deg, #fffbeb, #fef3c7);">
+                <span class="badge" style="background: #d4af37; color: #0f172a; border-color: #b8860b;">Review</span>
+                <h3 style="color: #92400e;">Midterm Review</h3>
+                <div class="review-notice">
+                    <p><b>مراجعة شاملة للميدترم</b><br>المحاضرة السادسة مراجعة للميدترم وسيتم اضافة اسئلة الميدترم قريباً</p>
                 </div>
             </div>
 
@@ -115,7 +454,7 @@
                 <h3>Statistics</h3>
                 <div class="content-actions">
                     <a href="lec10.pdf" target="_blank" class="btn-content btn-pdf"><span>📄</span> الشرح</a>
-                    <button class="btn-content btn-disabled" style="background: #94a3b8; cursor: not-allowed; opacity: 0.7;">🚫 لا يتوفر</button>
+                    <button class="btn-content btn-disabled"><span>🚫</span> لا يتوفر</button>
                     <a href="https://youtu.be/CL-fAMiysnk?si=SFdcnEClQhtUYmUT" target="_blank" class="btn-content btn-video"><span>🎬</span> الفيديو</a>
                 </div>
             </div>
@@ -126,8 +465,9 @@
     <footer class="footer">
         <p>جميع الحقوق محفوظة - بوابة الطالب الذكية © 2026</p>
     </footer>
+    
     <script>
-    const contentButtons = document.querySelectorAll('.btn-content');
+    const contentButtons = document.querySelectorAll('.btn-content:not(.btn-disabled)');
     let completed = JSON.parse(localStorage.getItem('stats_progress')) || [];
 
     contentButtons.forEach((btn, index) => {
@@ -135,11 +475,27 @@
             if (!completed.includes(index)) {
                 completed.push(index);
                 localStorage.setItem('stats_progress', JSON.stringify(completed));
+                
+                // إضافة مؤشر تفاعلي
+                btn.style.transform = 'scale(0.95)';
+                btn.style.backgroundColor = '#22c55e';
+                btn.style.color = 'white !important';
+                
+                setTimeout(() => {
+                    btn.style.transform = '';
+                    btn.style.backgroundColor = '';
+                    btn.style.color = '';
+                }, 300);
             }
         });
     });
-</script>
-
-
+    
+    // تحديث شريط التقدم في الصفحة الرئيسية عند العودة
+    window.addEventListener('beforeunload', function() {
+        if (window.opener && !window.opener.closed) {
+            window.opener.updateIndexProgress();
+        }
+    });
+    </script>
 </body>
-</html>
+                        </html>
