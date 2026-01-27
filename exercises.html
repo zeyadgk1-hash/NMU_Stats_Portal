@@ -6,123 +6,439 @@
     <title>بنك التدريبات الذكي | جامعة المنصورة الجديدة</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* إعادة ضبط كاملة */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            padding-top: 0;
+            margin: 0;
+            background: var(--bg);
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        /* النافبار ثابت */
+        .navbar {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 12px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .uni-name { font-weight: 900; font-size: 1.1rem; color: white; }
+        .app-tag { font-size: 0.8rem; color: #0ea5e9; font-weight: 700; }
+        
+        /* الهيدر */
+        .container {
+            max-width: 1200px;
+            margin: 100px auto 60px;
+            padding: 0 20px;
+        }
+        
+        /* العنوان */
+        .section-header {
+            text-align: center;
+            color: #0f172a;
+            font-size: clamp(1.8rem, 4vw, 2.3rem);
+            font-weight: 900;
+            margin: 40px 0 40px 0;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #d4af37;
+            display: inline-block;
+            width: 100%;
+            line-height: 1.3;
+        }
+        
+        /* الجريد */
+        .main-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+        
+        /* كروت الكويزات */
+        .subject-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .subject-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(14, 165, 233, 0.15);
+            border-color: #0ea5e9;
+        }
+        
+        /* الكروت الخاصة (مراجعات) */
+        .special-card {
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+            border: 2px solid #e2e8f0;
+        }
+        
+        /* البادج */
+        .badge {
+            display: inline-block;
+            background: #0f172a;
+            color: #d4af37;
+            padding: 6px 18px;
+            border-radius: 50px;
+            font-weight: 900;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+        }
+        
+        /* الأيقونة */
+        .card-icon {
+            font-size: 3rem;
+            margin: 10px 0 15px 0;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+        }
+        
+        /* عنوان الكويز */
+        .subject-card h3 {
+            color: #0f172a;
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+        
+        /* وصف الكويز */
+        .subject-card p {
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+        
+        /* زر ابدأ التدريب */
+        .btn-enter {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            max-width: 200px;
+            font-size: 0.95rem;
+            box-shadow: 0 5px 15px rgba(15, 23, 42, 0.2);
+        }
+        
+        .btn-enter:hover {
+            background: linear-gradient(135deg, #d4af37, #b8860b);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+        }
+        
+        /* زر المعطل */
+        .btn-disabled {
+            background: #e2e8f0 !important;
+            color: #94a3b8 !important;
+            cursor: not-allowed !important;
+            opacity: 0.7;
+        }
+        
+        .btn-disabled:hover {
+            transform: none !important;
+            background: #e2e8f0 !important;
+        }
+        
+        /* كرت المراجعة */
+        .review-card {
+            opacity: 0.8;
+            border: 2px dashed #94a3b8 !important;
+            background: #f8fafc;
+        }
+        
+        /* كرت المراجعات الشاملة */
+        .mid {
+            border-color: #f59e0b !important;
+            background: linear-gradient(135deg, #fffbeb, #fef3c7);
+        }
+        
+        .final {
+            border-color: #0ea5e9 !important;
+            background: linear-gradient(135deg, #ecfeff, #cffafe);
+        }
+        
+        /* الفوتر */
+        .footer {
+            text-align: center;
+            padding: 25px;
+            color: #64748b;
+            font-size: 0.9rem;
+            background: #f8fafc;
+            margin-top: 60px;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        /* زر الرجوع للرئيسية */
+        .nav-container .btn-enter {
+            background: rgba(212, 175, 55, 0.2);
+            color: #b8860b;
+            padding: 8px 20px;
+            border-radius: 50px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            max-width: none;
+            width: auto;
+            box-shadow: none;
+        }
+        
+        .nav-container .btn-enter:hover {
+            background: #d4af37;
+            color: #0f172a;
+            transform: scale(1.05);
+        }
+        
+        /* تحسينات للموبايل */
+        @media (max-width: 768px) {
+            .container {
+                margin: 90px auto 40px;
+                padding: 0 15px;
+            }
+            
+            .section-header {
+                font-size: 1.8rem;
+                margin: 30px 0;
+            }
+            
+            .main-grid {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .subject-card {
+                width: 100%;
+                padding: 20px 15px;
+            }
+            
+            .card-icon {
+                font-size: 2.5rem;
+            }
+            
+            .subject-card h3 {
+                font-size: 1.3rem;
+            }
+            
+            .subject-card p {
+                font-size: 0.9rem;
+            }
+            
+            .badge {
+                font-size: 0.85rem;
+                padding: 5px 15px;
+            }
+            
+            .btn-enter {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+                max-width: 180px;
+            }
+            
+            .nav-container {
+                padding: 0 10px;
+            }
+            
+            .uni-name {
+                font-size: 0.9rem;
+            }
+            
+            .app-tag {
+                font-size: 0.7rem;
+            }
+            
+            .nav-container .btn-enter {
+                padding: 6px 15px;
+                font-size: 0.85rem;
+            }
+        }
+        
+        /* لشاشات صغيرة جداً */
+        @media (max-width: 400px) {
+            .section-header {
+                font-size: 1.6rem;
+            }
+            
+            .card-icon {
+                font-size: 2.2rem;
+            }
+            
+            .subject-card h3 {
+                font-size: 1.2rem;
+            }
+            
+            .btn-enter {
+                max-width: 160px;
+                padding: 10px 15px;
+            }
+        }
+        
+        /* ترتيب الكروت في الموبايل */
+        @media (max-width: 768px) {
+            .main-grid:nth-of-type(1) .subject-card:nth-child(1) { order: 1; }
+            .main-grid:nth-of-type(1) .subject-card:nth-child(2) { order: 2; }
+            .main-grid:nth-of-type(1) .subject-card:nth-child(3) { order: 3; }
+            .main-grid:nth-of-type(1) .subject-card:nth-child(4) { order: 4; }
+            .main-grid:nth-of-type(1) .subject-card:nth-child(5) { order: 5; }
+            .main-grid:nth-of-type(1) .subject-card:nth-child(6) { order: 6; }
+            .main-grid:nth-of-type(1) .subject-card:nth-child(7) { order: 7; }
+            .main-grid:nth-of-type(1) .subject-card:nth-child(8) { order: 8; }
+            .main-grid:nth-of-type(1) .subject-card:nth-child(9) { order: 9; }
+            .main-grid:nth-of-type(1) .subject-card:nth-child(10) { order: 10; }
+            
+            .main-grid:nth-of-type(2) .subject-card:nth-child(1) { order: 1; }
+            .main-grid:nth-of-type(2) .subject-card:nth-child(2) { order: 2; }
+        }
+    </style>
 </head>
-<body>
-    <body class="content-page">
+<body class="content-page">
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
                 <span class="uni-name">جامعة المنصورة الجديدة</span>
                 <span class="app-tag">بنك التدريبات الذكي</span>
             </div>
-            <a href="index.html" class="btn-enter" style="background: rgba(255,255,255,0.2); padding: 5px 15px;">الرئيسية</a>
+            <a href="index.html" class="btn-enter">🏠 الرئيسية</a>
         </div>
     </nav>
 
     <main class="container">
         
-        <h2 class="section-header">تدريبات المحاضرات الدراسية</h2>
+        <h2 class="section-header">📝 تدريبات المحاضرات الدراسية</h2>
         <div class="main-grid">
             
-            <div class="subject-card quiz-card">
+            <div class="subject-card">
                 <span class="badge">Quiz 01</span>
                 <div class="card-icon">🧠</div>
                 <h3>Probability</h3>
                 <p>أساسيات الاحتمالات وفضاء العينة.</p>
-                <a href="quiz_stats.html?lec=1" class="btn-enter btn-tutorial">ابدأ التدريب</a>
+                <a href="quiz_stats.html?lec=1" class="btn-enter">ابدأ التدريب</a>
             </div>
 
-            <div class="subject-card quiz-card">
+            <div class="subject-card">
                 <span class="badge">Quiz 02</span>
                 <div class="card-icon">🔢</div>
                 <h3>Counting Principals</h3>
                 <p>تقنيات العد والتباديل والتوافيق.</p>
-                <a href="quiz_stats.html?lec=2" class="btn-enter btn-tutorial">ابدأ التدريب</a>
+                <a href="quiz_stats.html?lec=2" class="btn-enter">ابدأ التدريب</a>
             </div>
 
-            <div class="subject-card quiz-card">
+            <div class="subject-card">
                 <span class="badge">Quiz 03</span>
                 <div class="card-icon">📊</div>
                 <h3>Bayes' Theorem & RV</h3>
                 <p>قاعدة بايز والمتغيرات العشوائية.</p>
-                <a href="quiz_stats.html?lec=3" class="btn-enter btn-tutorial">ابدأ التدريب</a>
+                <a href="quiz_stats.html?lec=3" class="btn-enter">ابدأ التدريب</a>
             </div>
 
-            <div class="subject-card quiz-card">
+            <div class="subject-card">
                 <span class="badge">Quiz 04</span>
                 <div class="card-icon">📈</div>
                 <h3>Random Variable</h3>
                 <p>توزيعات المتغيرات العشوائية.</p>
-                <a href="quiz_stats.html?lec=4" class="btn-enter btn-tutorial">ابدأ التدريب</a>
+                <a href="quiz_stats.html?lec=4" class="btn-enter">ابدأ التدريب</a>
             </div>
 
-            <div class="subject-card quiz-card">
+            <div class="subject-card">
                 <span class="badge">Quiz 05</span>
                 <div class="card-icon">🎯</div>
                 <h3>Special Discrete Dist.</h3>
                 <p>التوزيعات المتقطعة الخاصة.</p>
-                <a href="quiz_stats.html?lec=5" class="btn-enter btn-tutorial">ابدأ التدريب</a>
+                <a href="quiz_stats.html?lec=5" class="btn-enter">ابدأ التدريب</a>
             </div>
 
-            <div class="subject-card" style="opacity: 0.8; border: 1px dashed var(--accent-color);">
-                <span class="badge" style="background:#7f8c8d">Review</span>
+            <div class="subject-card review-card">
+                <span class="badge" style="background: #64748b;">Review</span>
                 <div class="card-icon">📖</div>
                 <h3>Midterm Review</h3>
                 <p>أسئلة هذه المحاضرة مدمجة في مراجعة الميدترم بالأسفل.</p>
-                <button class="btn-enter btn-disabled" disabled style="background: #94a3b8; cursor: not-allowed;">مراجعة فقط</button>
+                <button class="btn-enter btn-disabled" disabled>مراجعة فقط</button>
             </div>
 
-            <div class="subject-card quiz-card">
+            <div class="subject-card">
                 <span class="badge">Quiz 07</span>
                 <div class="card-icon">♾️</div>
                 <h3>Continuous Random</h3>
                 <p>المتغيرات العشوائية المتصلة.</p>
-                <a href="quiz_stats.html?lec=7" class="btn-enter btn-tutorial">ابدأ التدريب</a>
+                <a href="quiz_stats.html?lec=7" class="btn-enter">ابدأ التدريب</a>
             </div>
 
-            <div class="subject-card quiz-card">
+            <div class="subject-card">
                 <span class="badge">Quiz 08</span>
                 <div class="card-icon">📉</div>
                 <h3>Normal Distribution</h3>
                 <p>التوزيع الطبيعي وخصائصه.</p>
-                <a href="quiz_stats.html?lec=8" class="btn-enter btn-tutorial">ابدأ التدريب</a>
+                <a href="quiz_stats.html?lec=8" class="btn-enter">ابدأ التدريب</a>
             </div>
 
-            <div class="subject-card quiz-card">
+            <div class="subject-card">
                 <span class="badge">Quiz 09</span>
                 <div class="card-icon">🤝</div>
                 <h3>Joint Probability</h3>
                 <p>التوزيعات الاحتمالية المشتركة.</p>
-                <a href="quiz_stats.html?lec=9" class="btn-enter btn-tutorial">ابدأ التدريب</a>
+                <a href="quiz_stats.html?lec=9" class="btn-enter">ابدأ التدريب</a>
             </div>
 
-            <div class="subject-card quiz-card">
+            <div class="subject-card">
                 <span class="badge">Quiz 10</span>
                 <div class="card-icon">📝</div>
                 <h3>Statistics</h3>
                 <p>مقدمة في التحليل الإحصائي.</p>
-                <a href="quiz_stats.html?lec=10" class="btn-enter btn-tutorial">ابدأ التدريب</a>
+                <a href="quiz_stats.html?lec=10" class="btn-enter">ابدأ التدريب</a>
             </div>
 
         </div>
 
-                <h2 class="section-header" style="margin-top: 80px;">المراجعات والامتحانات الشاملة</h2>
+        <h2 class="section-header">🏆 المراجعات والامتحانات الشاملة</h2>
         <div class="main-grid">
             
-            <div class="subject-card special-card mid" style="opacity: 0.7; filter: grayscale(0.5); border: 2px dashed var(--secondary-color);">
-                <span class="badge" style="background: #e11d48;">قريباً ⏳</span>
+            <div class="subject-card special-card mid">
+                <span class="badge" style="background: #f59e0b; color: #0f172a;">قريباً ⏳</span>
                 <div class="card-icon">🏁</div>
-                <h3>Midterm Exam Review</h3>
-                <p>شامل لجميع دروس النصف الأول.. جاري رفع الأسئلة والملاحظات.</p>
-                <button class="btn-enter btn-disabled" disabled style="background: #64748b; cursor: not-allowed; width: 100%;">مغلق حالياً</button>
+                <h3 style="color: #92400e;">Midterm Exam Review</h3>
+                <p style="color: #b45309;">شامل لجميع دروس النصف الأول.. جاري رفع الأسئلة والملاحظات.</p>
+                <button class="btn-enter btn-disabled" disabled>مغلق حالياً</button>
             </div>
 
-            <div class="subject-card special-card final" style="opacity: 0.7; filter: grayscale(0.5); border: 2px dashed var(--primary-color);">
-                <span class="badge" style="background: #e11d48;">قريباً ⏳</span>
+            <div class="subject-card special-card final">
+                <span class="badge" style="background: #0ea5e9; color: white;">قريباً ⏳</span>
                 <div class="card-icon">🏆</div>
-                <h3>Final Comprehensive Exam</h3>
-                <p>الاختبار النهائي المحاكي للامتحان الرسمي.. انتظرونا!</p>
-                <button class="btn-enter btn-disabled" disabled style="background: #64748b; cursor: not-allowed; width: 100%;">مغلق حالياً</button>
+                <h3 style="color: #0369a1;">Final Comprehensive Exam</h3>
+                <p style="color: #0c4a6e;">الاختبار النهائي المحاكي للامتحان الرسمي.. انتظرونا!</p>
+                <button class="btn-enter btn-disabled" disabled>مغلق حالياً</button>
             </div>
 
         </div>
@@ -130,7 +446,7 @@
     </main>
 
     <footer class="footer">
-        <p>كل التوفيق لزملائي طلاب حاسبات 2026 © بوابة الطالب الذكية</p>
+        <p>كلمتان خفيفتان على اللسان، ثقيلتان في الميزان، حبيبتان إلى الرحمن: سبحان الله وبحمده، سبحان الله العظيم</p>
     </footer>
 
 </body>
