@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>بوابة الطالب الذكية | جامعة المنصورة الجديدة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { padding-top: 100px; }
+        .hero-section { padding: 100px 20px; margin-bottom: 20px; }
+        .hero-section h1 { margin-bottom: 15px; font-size: 3rem; }
+        .container { margin-top: -60px; position: relative; z-index: 10; }
+        
+        /* ستايل شريط التقدم الحقيقي */
+        .progress-container {
+            background: #e2e8f0;
+            border-radius: 20px;
+            height: 12px;
+            margin: 15px 0 5px 0;
+            width: 100%;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        #index-progress-bar {
+            width: 0%; /* البداية صفر ويتحرك بالـ JS */
+            height: 100%;
+            background: linear-gradient(90deg, #d4af37, #b8860b);
+            transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+        }
+
+        /* ستايل إضافي للمواد المغلقة */
+        .card-disabled {
+            opacity: 0.7;
+            filter: grayscale(0.6);
+            border: 2px dashed #94a3b8 !important;
+            pointer-events: none;
+        }
+        .badge-soon {
+            background: #64748b !important;
+        }
+        
+        /* تنسيق شريط التقدم للمواد المعطلة */
+        .subject-card.card-disabled .progress-bar {
+            background: #e2e8f0;
+        }
+        .subject-card.card-disabled .progress-bar .progress {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="uni-name">جامعة المنصورة الجديدة</span>
+                <span class="app-tag">بوابة الطالب الذكية</span>
+            </div>
+            <div class="user-profile">
+                <img src="uni-logo.png" alt="لوجو جامعة المنصورة الجديدة" class="navbar-logo">
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero-section">
+        <h1>اهلا بيك صديقي البائس</h1>
+        <p style="font-size: 1.2rem; opacity: 0.9;">اختر المادة الدراسية لتبدأ المذاكرة والتدريب</p>
+    </header>
+
+    <main class="container">
+        <div class="main-grid">
+            
+            <!-- مادة الاحتمالات والإحصاء (المادة النشطة) -->
+            <div class="subject-card">
+                <span class="badge" style="background: var(--success);">متاح الآن 🔥</span>
+                <div class="card-icon">📊</div>
+                <h3>الاحتمالات والإحصاء</h3>
+                <p>Probability & Statistics</p>
+                
+                <!-- شريط التقدم الحقيقي -->
+                <div class="progress-container">
+                    <div id="index-progress-bar"></div>
+                </div>
+                <p id="progress-text" style="font-size: 0.85rem; font-weight: 800; color: #0f172a; margin-bottom: 15px;">0% مكتمل</p>
+
+                <a href="javascript:void(0)" onclick="toggleModal()" class="btn-enter">دخول المادة</a>
+            </div>
+
+            <!-- المواد المعطلة -->
+            <div class="subject-card card-disabled">
+                <span class="badge badge-soon">قريباً ⏳</span>
+                <div class="card-icon">💻</div>
+                <h3>البرمجة كائنية التوجه</h3>
+                <p>Object Oriented Programming</p>
+                <div class="progress-bar"><div class="progress" style="width: 0%"></div></div>
+                <a href="#" class="btn-enter disabled">قيد التجهيز</a>
+            </div>
+
+            <div class="subject-card card-disabled">
+                <span class="badge badge-soon">قريباً ⏳</span>
+                <div class="card-icon">⚡</div>
+                <h3>الدوائر الكهربية والإلكترونية</h3>
+                <p>Electric & Electronic circuits</p>
+                <div class="progress-bar"><div class="progress" style="width: 0%"></div></div>
+                <a href="#" class="btn-enter disabled">قيد التجهيز</a>
+            </div>
+
+            <div class="subject-card card-disabled">
+                <span class="badge badge-soon">قريباً ⏳</span>
+                <div class="card-icon">📐</div>
+                <h3>الرياضيات II</h3>
+                <p>Mathematics II</p>
+                <div class="progress-bar"><div class="progress" style="width: 0%"></div></div>
+                <a href="#" class="btn-enter disabled">قيد التجهيز</a>
+            </div>
+
+            <div class="subject-card card-disabled">
+                <span class="badge badge-soon">قريباً ⏳</span>
+                <div class="card-icon">👔</div>
+                <h3>مقدمة في الإدارة</h3>
+                <p>Introduction to management</p>
+                <div class="progress-bar"><div class="progress" style="width: 0%"></div></div>
+                <a href="#" class="btn-enter disabled">قيد التجهيز</a>
+            </div>
+
+            <div class="subject-card card-disabled">
+                <span class="badge badge-soon">قريباً ⏳</span>
+                <div class="card-icon">📜</div>
+                <h3>التذوق الأدبي</h3>
+                <p>Literature Appreciation</p>
+                <div class="progress-bar"><div class="progress" style="width: 0%"></div></div>
+                <a href="#" class="btn-enter disabled">قيد التجهيز</a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- المودال الخاص باختيار وجهة المادة -->
+    <div id="subjectModal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-btn" onclick="toggleModal()">&times;</span>
+            <h2>اختر وجهتك يا وحش 🚀</h2>
+            <p>مادة الاحتمالات والإحصاء</p>
+            
+            <div class="modal-options">
+                <a href="statistics.html" class="option-item">
+                    <div class="opt-icon">📚</div>
+                    <div class="opt-info">
+                        <h4>محتوى المادة</h4>
+                        <span>شرح، محاضرات، وفيديوهات</span>
+                    </div>
+                </a>
+
+                <a href="exercises.html" class="option-item accent">
+                    <div class="opt-icon">📝</div>
+                    <div class="opt-info">
+                        <h4>بنك التدريبات</h4>
+                        <span>اختبارات تفاعلية ومراجعات شاملة</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>جميع الحقوق محفوظة معرفش فين هما بيقولوا كدة</p>
+    </footer>
+
+    <script>
+        // وظيفة تحديث شريط التقدم
+        function updateIndexProgress() {
+            const bar = document.getElementById('index-progress-bar');
+            const text = document.getElementById('progress-text');
+            
+            // اجمالي المهام (عد كل أزرار الشرح والتيتوريال والفيديو في الصفحة التانية)
+            const totalTasks = 29; 
+            
+            const completed = JSON.parse(localStorage.getItem('stats_progress')) || [];
+            let percentage = Math.round((completed.length / totalTasks) * 100);
+            if (percentage > 100) percentage = 100;
+
+            if (bar) {
+                // أنيميشن بعد 300 مللي ثانية من فتح الصفحة
+                setTimeout(() => {
+                    bar.style.width = percentage + '%';
+                    if (text) text.innerText = percentage + '% مكتمل';
+                }, 300);
+            }
+        }
+
+        // تشغيل الوظيفة عند التحميل وعند العودة للصفحة
+        window.addEventListener('load', updateIndexProgress);
+        window.addEventListener('pageshow', updateIndexProgress);
+
+        // وظيفة المودال
+        function toggleModal() {
+            const modal = document.getElementById('subjectModal');
+            if (modal.classList.contains('show')) {
+                modal.classList.remove('show');
+                setTimeout(() => modal.style.display = 'none', 300);
+            } else {
+                modal.style.display = 'flex';
+                setTimeout(() => modal.classList.add('show'), 10);
+            }
+        }
+
+        // إغلاق المودال عند النقر خارج المحتوى
+        window.onclick = function(event) {
+            const modal = document.getElementById('subjectModal');
+            if (event.target == modal) toggleModal();
+        }
+    </script>
+</body>
+</html>

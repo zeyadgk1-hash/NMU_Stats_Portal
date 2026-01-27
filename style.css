@@ -1,0 +1,559 @@
+/* --- المتغيرات اللونية (Modern Blue & Glass) --- */
+:root {
+    --primary: #0f172a;      /* كحلي غامق فخم */
+    --accent: #0ea5e9;       /* أزرق سماوي مضيء */
+    --accent-glow: rgba(14, 165, 233, 0.15);
+    --bg: #f8fafc;           /* خلفية هادية */
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --white: #ffffff;
+    --danger: #ef4444;
+    --success: #22c55e;
+    --tut: #8b5cf6;
+    --yt: #ff0000;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background-color: var(--bg);
+    color: var(--text-main);
+    line-height: 1.6;
+    padding-top: 80px; /* مسافة أمان للنابار */
+}
+
+/* --- النابار (Glassmorphism Navbar) --- */
+.navbar {
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(10px);
+    color: var(--white);
+    padding: 12px 0;
+    position: fixed;
+    top: 0; width: 100%; z-index: 5000;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.uni-name { font-weight: 900; font-size: 1.1rem; color: var(--white); }
+.app-tag { font-size: 0.8rem; color: var(--accent); font-weight: 700; }
+
+/* --- الهيرو سكشن (Modern Gradient) --- */
+.hero-section {
+    background: radial-gradient(circle at top right, var(--primary), #1e293b);
+    padding: 60px 20px 100px;
+    text-align: center;
+    color: var(--white);
+    clip-path: ellipse(150% 100% at 50% 0%);
+    margin-bottom: -40px;
+}
+
+.hero-section h1 {
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-weight: 900;
+    margin-bottom: 15px;
+}
+
+/* --- الحاوية الرئيسية --- */
+.container {
+    max-width: 1100px;
+    margin: 0 auto 60px;
+    padding: 0 15px;
+}
+
+.main-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+/* --- الكروت (Subject Cards) --- */
+.subject-card {
+    background: var(--white);
+    padding: 30px 20px;
+    border-radius: 24px;
+    text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.subject-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px -10px var(--accent-glow);
+    border-color: var(--accent);
+}
+
+.card-icon {
+    font-size: 3.5rem;
+    margin-bottom: 15px;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+}
+
+.subject-card h3 { color: var(--primary); font-size: 1.3rem; margin-bottom: 5px; }
+.subject-card p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px; }
+
+/* --- الأزرار المودرن (Action Buttons) --- */
+/* --- تطوير أزرار الأكشن (The Luxury Look) --- */
+.card-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+@media (min-width: 768px) {
+    .card-actions { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+}
+
+.btn-enter {
+    padding: 12px 18px;
+    border-radius: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 0.9rem;
+    color: var(--white);
+    background: var(--primary);
+    border: none;
+    cursor: pointer;
+    transition: 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+
+.btn-enter:hover { filter: brightness(1.2); transform: scale(1.02); }
+.btn-pdf { background: var(--danger); }
+.btn-tutorial { background: var(--tut); }
+.btn-video { background: var(--yt); }
+
+
+/* --- اللوحة المنبثقة (Premium Modal) --- */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(12px);
+    z-index: 9000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal-content {
+    background: var(--white);
+    padding: 40px 30px;
+    border-radius: 30px;
+    width: 100%;
+    max-width: 480px;
+    text-align: center;
+    box-shadow: 0 30px 60px -12px rgba(0,0,0,0.25);
+    animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-content h2 { font-weight: 900; color: var(--primary); margin-bottom: 25px; }
+
+.option-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: var(--bg);
+    padding: 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    margin-bottom: 12px;
+    border: 2px solid transparent;
+    transition: 0.3s;
+}
+
+.option-item:hover {
+    background: var(--white);
+    border-color: var(--accent);
+    transform: translateX(-8px);
+}
+
+.opt-info { text-align: right; }
+.opt-info h4 { color: var(--primary); font-size: 1.1rem; }
+.opt-info span { color: var(--text-muted); font-size: 0.8rem; }
+
+/* --- استجابة الموبايل (Responsive Tuning) --- */
+@media (max-width: 600px) {
+    body { padding-top: 75px; }
+    .hero-section { padding: 40px 20px 80px; }
+    .main-grid { gap: 15px; }
+    .subject-card { padding: 25px 15px; border-radius: 20px; }
+    .nav-container { padding: 0 15px; }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* التنسيقات الخاصة بالـ Quiz Card */
+/* --- تنسيق كارت السؤال (The Quiz Pro Look) --- */
+.q-card {
+    background: var(--white);
+    border-radius: 28px;
+    padding: clamp(25px, 5vw, 45px); /* مسافات مرنة حسب حجم الشاشة */
+    margin-bottom: 30px;
+    box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(14, 165, 233, 0.1);
+    animation: fadeInUp 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    max-width: 850px;
+    margin-inline: auto; /* توسيط الكارت في نص الصفحة */
+}
+
+/* ترقيم السؤال (Badge) */
+.q-card .badge {
+    position: relative;
+    top: -10px;
+    left: 0;
+    margin-bottom: 15px;
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    padding: 6px 20px;
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: 0.85rem;
+}
+
+/* نص السؤال */
+.q-text-eng {
+    font-size: clamp(1.1rem, 4vw, 1.35rem);
+    font-weight: 800;
+    color: var(--primary);
+    line-height: 1.7;
+    text-align: left;
+    direction: ltr; /* اللغة الإنجليزية لليسار */
+    margin: 20px 0 30px 0;
+    padding-left: 10px;
+    border-left: 4px solid var(--accent); /* علامة تمييز للسؤال */
+}
+
+/* حاوية الخيارات */
+.options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* مسافة بين الاختيارات */
+}
+
+/* أزرار الخيارات (Options) */
+.opt-btn {
+    padding: 18px 25px;
+    border-radius: 18px;
+    border: 2px solid #f1f5f9;
+    background: #f8fafc;
+    text-align: left;
+    direction: ltr;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-main);
+    cursor: pointer;
+    transition: all 0.25s ease;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.opt-btn:hover {
+    border-color: var(--accent);
+    background: #f0f9ff;
+    transform: translateX(8px); /* حركة خفيفة عند الوقوف على الخيار */
+}
+
+/* عند اختيار الإجابة الصحيحة */
+.opt-btn.correct {
+    background: #dcfce7 !important;
+    border-color: #22c55e !important;
+    color: #166534 !important;
+}
+
+/* عند اختيار إجابة خاطئة */
+.opt-btn.wrong {
+    background: #fee2e2 !important;
+    border-color: #ef4444 !important;
+    color: #991b1b !important;
+}
+
+/* --- صندوق الملاحظات (Explanation Box) --- */
+.explanation-box {
+    margin-top: 25px;
+    padding: 20px;
+    background: #fffbeb;
+    border-radius: 18px;
+    border-right: 6px solid #fbbf24;
+    color: #92400e;
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1.6;
+    display: none; /* مخفي ويظهر بالـ JS */
+    animation: fadeIn 0.4s ease;
+}
+
+/* تحسين المعادلات الرياضية داخل الخيارات */
+.opt-btn .katex {
+    font-size: 1.15em !important;
+    color: inherit; /* تأخذ نفس لون النص (أخضر أو أحمر أو عادي) */
+}
+
+/* --- شريط التقدم (Progress Bar) --- */
+.progress-bar {
+    background: #e2e8f0;
+    height: 10px;
+    border-radius: 20px;
+    margin: 30px auto;
+    max-width: 850px;
+    overflow: hidden;
+}
+
+.progress {
+    background: linear-gradient(to right, var(--accent), var(--success));
+    height: 100%;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* الموبايل Tuning */
+@media (max-width: 600px) {
+    .q-card {
+        padding: 20px 15px;
+        border-radius: 20px;
+    }
+    .opt-btn {
+        padding: 15px 18px;
+        font-size: 0.95rem;
+    }
+}
+/* --- تعديل رقم السؤال Question Badge --- */
+.q-card .badge {
+    display: inline-block;
+    position: static; /* إلغاء الوضع القديم */
+    background: var(--primary);
+    color: var(--accent);
+    padding: 5px 15px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 800;
+    margin-bottom: 15px;
+    border: 1px solid rgba(14, 165, 233, 0.2);
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+}
+
+/* --- زر تسجيل الإجابات (The Mega Action Button) --- */
+#submit-btn {
+    display: block;
+    width: min(300px, 90%); /* عرض مرن حسب الشاشة */
+    margin: 40px auto 100px; /* مسافات محترمة من فوق ومن تحت */
+    padding: 18px 30px;
+    background: linear-gradient(135deg, var(--accent), var(--secondary-color));
+    color: white;
+    border: none;
+    border-radius: 50px; /* شكل بيضاوي فخم */
+    font-size: 1.1rem;
+    font-weight: 900;
+    cursor: pointer;
+    box-shadow: 0 10px 20px -5px rgba(14, 165, 233, 0.4);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* --- زر تسجيل الإجابات (ظهور قوي ومضمون) --- */
+#submit-btn {
+    display: block !important; /* التأكد من ظهوره */
+    width: 90%;
+    max-width: 400px;
+    margin: 40px auto 100px; 
+    padding: 18px;
+    background: linear-gradient(135deg, #d4af37, #b8860b); /* ذهبي فخم */
+    color: #003366 !important; /* نص كحلي واضح جداً */
+    border: none;
+    border-radius: 15px;
+    font-size: 1.2rem;
+    font-weight: 900;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    position: relative;
+    z-index: 999; /* رفعه فوق أي عنصر آخر */
+    transition: 0.3s;
+}
+
+#submit-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(212, 175, 55, 0.4);
+}
+
+/* --- تنسيق صندوق النتيجة (Modal Result) --- */
+.modal-content h2 {
+    color: #003366 !important; /* الكحلي بتاعنا */
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.modal-content p {
+    color: #1e293b !important; /* رمادي غامق جداً وواضح */
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 10px 0;
+    line-height: 1.8;
+}
+
+/* جعل الإيموجيز تظهر بحجم كبير ومناسب */
+.modal-content .emoji-result {
+    font-size: 3.5rem;
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* زرار الإغلاق داخل النتيجة */
+.close-result-btn {
+    background: #003366;
+    color: white;
+    padding: 10px 25px;
+    border-radius: 10px;
+    border: none;
+    margin-top: 20px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+
+/* --- تحسين تذييل الصفحة للموبايل --- */
+.quiz-footer {
+    padding-bottom: 80px; /* عشان الزرار ميبقاش ملزوق في حرف الشاشة */
+}
+
+/* نص السؤال بعد تعديل الرقم */
+.q-text-eng {
+    margin-top: 5px; /* تقليل المسافة بعد ما رفعنا الرقم فوقه */
+    border-right: 4px solid var(--accent); /* إضافة خط من جهة اليمين للعربية أو اليسار للانجليزية */
+    padding-right: 15px;
+}
+/* --- تنسيق لوجو الجامعة في النابار --- */
+.navbar-logo {
+    height: 45px; /* ارتفاع مناسب جداً للنابار */
+    width: auto;  /* الحفاظ على أبعاد اللوجو */
+    border-radius: 5px; /* لمسة جمالية لو اللوجو ليه حواف */
+    transition: 0.3s ease;
+    cursor: pointer;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); /* ظل خفيف للوجو */
+}
+
+.navbar-logo:hover {
+    transform: scale(1.05); /* حركة خفيفة عند الوقوف عليه */
+}
+
+/* تعديل للموبايل عشان اللوجو ميضيقش النابار */
+@media (max-width: 600px) {
+    .navbar-logo {
+        height: 35px; 
+    }
+}
+/* --- تنسيق خاص وحصري لأزرار صفحة المحتويات فقط --- */
+/* --- تصميم أزرار المحتوى الفائق العصرية (Ultra-Modern UI) --- */
+.content-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 25px;
+    justify-content: space-between;
+}
+
+@media (max-width: 600px) {
+    .content-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+.btn-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 10px;
+    border-radius: 14px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* لون زر الشرح (نظيف وهادئ) */
+.btn-content.btn-pdf {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444 !important;
+}
+.btn-content.btn-pdf:hover {
+    background: #ef4444;
+    color: #fff !important;
+    box-shadow: 0 8px 20px rgba(239, 68, 68, 0.3);
+}
+
+/* لون زر التيتوريال (عصري) */
+.btn-content.btn-tutorial {
+    background: rgba(139, 92, 246, 0.1);
+    color: #8b5cf6 !important;
+}
+.btn-content.btn-tutorial:hover {
+    background: #8b5cf6;
+    color: #fff !important;
+    box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
+}
+
+/* لون زر الفيديو (أحمر نقي) */
+.btn-content.btn-video {
+    background: rgba(255, 0, 0, 0.05);
+    color: #ff0000 !important;
+}
+.btn-content.btn-video:hover {
+    background: #ff0000;
+    color: #fff !important;
+    box-shadow: 0 8px 20px rgba(255, 0, 0, 0.3);
+}
+
+/* إضافة لمسة احترافية عند الضغط */
+.btn-content:active {
+    transform: scale(0.95);
+}
+
+/* أيقونة الزرار */
+.btn-content span {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+.btn-content:hover span {
+    transform: rotate(10deg) scale(1.1);
+}
+#index-progress-bar {
+    width: 0%;
+    /* القيمة الابتدائية */
+    height: 100%;
+    background: linear-gradient(90deg, #d4af37, #b8860b);
+    border-radius: 10px;
+    /* ده السحر اللي بيخلي الشريط يتحرك بنعومة */
+    transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+}
+

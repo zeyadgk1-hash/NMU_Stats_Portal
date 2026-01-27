@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بوابة التدريب الذكية | جامعة المنصورة الجديدة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+    <style>
+        #loader {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            min-height: 300px; color: var(--primary-color);
+        }
+        .spinner {
+            width: 50px; height: 50px; border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--accent-color); border-radius: 50%;
+            animation: spin 0.8s linear infinite; margin-bottom: 20px;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        #question-container { opacity: 0; transition: opacity 0.3s ease; }
+        #question-container.loaded { opacity: 1; }
+        
+        /* تحسين مظهر رسالة الـ Feedback المضحكة */
+        #feedback-text {
+            font-size: 1.4rem;
+            line-height: 1.6;
+            padding: 15px;
+            display: block;
+        }
+    </style>
+</head>
+<body class="quiz-body">
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="uni-name" id="quiz-title">جاري التحميل...</span>
+                <span class="app-tag">بوابة التدريب الذكية</span>
+            </div>
+            <a href="exercises.html" class="btn-enter" style="background: rgba(255,255,255,0.2); padding: 5px 15px;">إلغاء التدريب</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div id="loader">
+            <div class="spinner"></div>
+            <p>جاري تجهيز الاختبار بسرعة الصاروخ... 🚀</p>
+        </div>
+
+        <div class="progress-bar">
+            <div id="quiz-progress" class="progress" style="width: 0%"></div>
+        </div>
+
+        <div id="question-container"></div>
+
+        <div class="quiz-footer" style="text-align: center; margin-top: 40px; padding-bottom: 50px;">
+            <button id="submit-btn" class="btn-enter btn-pdf" style="width: 220px; display: none; margin: 0 auto;" onclick="showResults()">تسجيل الإجابات</button>
+        </div>
+    </main>
+
+    <div id="resultModal" class="modal-overlay">
+        <div class="modal-content">
+            <h2 id="score-text">نتيجتك: 0%</h2>
+            <p id="feedback-text" style="color: var(--white); font-weight: bold; margin-bottom: 25px;"></p>
+            <div class="card-actions" style="grid-template-columns: 1fr;">
+                <a href="exercises.html" class="btn-enter btn-tutorial">العودة لبنك التدريبات</a>
+                <a href="javascript:location.reload()" class="btn-enter" style="background: #334155; margin-top: 10px;">إعادة المحاولة</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let questions = [];
+        let userAnswers = {};
+        const urlParams = new URLSearchParams(window.location.search);
+        const lecId = urlParams.get('lec');
+
+        async function loadQuestions() {
+            if(!lecId) return;
+
+            const script = document.createElement('script');
+            script.src = `lec${lecId}_data.js`; 
+            script.async = true; 
+            
+            script.onload = () => {
+                if (typeof quizData !== 'undefined') {
+                    questions = quizData.questions;
+                    document.getElementById('quiz-title').innerText = quizData.title;
+                    renderQuestions();
+                }
+            };
+            document.head.appendChild(script);
+        }
+
+        function renderQuestions() {
+            const container = document.getElementById('question-container');
+            let fullHtml = '';
+            
+            questions.forEach((q, idx) => {
+                fullHtml += `
+                <div class="q-card">
+                    <span class="badge" style="top: 15px; left: 20px; right: auto;">Question ${idx + 1}</span>
+                    <p class="q-text-eng">${q.text}</p>
+                    <div class="options-container">
+                        ${q.options.map((opt, oIdx) => `
+                            <button class="opt-btn" onclick="selectOption(${idx}, ${oIdx}, this)" data-q="${idx}">
+                                ${opt}
+                            </button>
+                        `).join('')}
+                    </div>
+                </div>`;
+            });
+
+            container.innerHTML = fullHtml;
+
+            if (window.renderMathInElement) {
+                renderMathInElement(container, {
+                    delimiters: [
+                        {left: '\\(', right: '\\)', display: false},
+                        {left: '\\[', right: '\\]', display: true}
+                    ],
+                    throwOnError : false
+                });
+            }
+
+            completeLoading();
+        }
+
+        function completeLoading() {
+            document.getElementById('loader').style.display = 'none';
+            const container = document.getElementById('question-container');
+            container.classList.add('loaded');
+            document.getElementById('submit-btn').style.display = 'block';
+        }
+
+        function selectOption(qIdx, oIdx, btn) {
+            userAnswers[qIdx] = oIdx;
+            document.querySelectorAll(`[data-q="${qIdx}"]`).forEach(b => {
+                b.style.borderColor = '#f1f5f9'; b.style.background = '#f8fafc';
+            });
+            btn.style.borderColor = 'var(--primary-color)';
+            btn.style.background = '#f0f9ff';
+            let solved = Object.keys(userAnswers).length;
+            document.getElementById('quiz-progress').style.width = (solved / questions.length * 100) + '%';
+        }
+
+        function showResults() {
+            let score = 0;
+            questions.forEach((q, idx) => { if (userAnswers[idx] === q.correct) score++; });
+            const finalScore = Math.round((score / questions.length) * 100);
+            
+            // تنبيه "لحظة الحقيقة" قبل ظهور النتيجة
+            alert("لحظة الحقيقة.. " + (finalScore < 50 ? "استعنا على الشقا بالله 💀" : "يا مسهل يا رب 🔥"));
+
+            document.getElementById('score-text').innerText = `نتيجتك: ${finalScore}%`;
+            const feedback = document.getElementById('feedback-text');
+
+            // منطق "قصف الجبهة" المصري حسب الدرجة
+            if (finalScore === 100) {
+                feedback.innerHTML = "قفشتك 🫵 امسك دحيح شاطر";
+            } 
+            else if (finalScore >= 85) {
+                feedback.innerHTML = "في مثل صيني قديم بيقول انك جامد على طول 😎🚀";
+            } 
+            else if (finalScore >= 65) {
+                feedback.innerHTML = "شغال يا صاحبي.. <br> بس شد حيلك عشان الميدترم ميزعلناش 😅👌";
+            } 
+            else if (finalScore >= 50) {
+                feedback.innerHTML = "إنت نجحت زق! <br> اللي هو يا دوب عديت من قدام الباب.. ركز يا بطل! 🐢";
+            } 
+            else if (finalScore > 0) {
+                feedback.innerHTML = "حرام على اللي عداك من إعدادي والله! <br> إنت كنت بترسم عصافير في ورقة الإجابة؟ 💀😂";
+            } 
+            else {
+                feedback.innerHTML = "صفر؟! <br> ده إنت مجيتش المحاضرة ولا شوفتها حتى.. إقفل وافتح الكتاب يا بائس! 😭🤣";
+            }
+            
+            document.getElementById('resultModal').style.display = 'flex';
+        }
+
+        window.onload = loadQuestions;
+    </script>
+</body>
+</html>
