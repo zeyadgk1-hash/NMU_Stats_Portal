@@ -5,131 +5,465 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>بوابة الطالب الذكية | جامعة المنصورة الجديدة</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* إعادة ضبط كاملة */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        :root {
+            --primary: #0f172a;
+            --secondary: #1e293b;
+            --accent: #d4af37;
+            --accent-dark: #b8860b;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --gray-light: #e2e8f0;
+            --success: #22c55e;
+            --info: #0ea5e9;
+            --warning: #f59e0b;
+            --border-radius: 20px;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.12);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         body {
-            padding-top: 0;
-            margin: 0;
-            background: var(--bg);
             font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            color: var(--primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
         
-        /* الهيدر مثل الصورة */
-        .hero-section { 
-            padding: 80px 20px 60px;
-            margin-top: 60px; /* مسافة من النافبار */
-            background: linear-gradient(135deg, #0f172a, #1e293b);
+        /* نافبار محسن */
+        .navbar {
+            background: white;
+            padding: 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border-bottom: 1px solid var(--gray-light);
+            animation: slideDown 0.5s ease;
+        }
+        
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+        }
+        
+        .logo {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .uni-name {
+            font-weight: 900;
+            font-size: 1.2rem;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+        }
+        
+        .app-tag {
+            font-size: 0.8rem;
+            color: var(--accent);
+            font-weight: 700;
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .navbar-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            object-fit: contain;
+            border: 2px solid var(--gray-light);
+        }
+        
+        /* الهيدر الرئيسي */
+        .hero-section {
+            padding: 100px 20px 60px;
+            margin-top: 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             text-align: center;
             color: white;
-            border-bottom-left-radius: 30px;
-            border-bottom-right-radius: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), transparent);
+            border-radius: 50%;
+        }
+        
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, transparent, rgba(59, 130, 246, 0.1));
+            border-radius: 50%;
         }
         
         .hero-section h1 {
-            margin-bottom: 5px;
+            margin-bottom: 10px;
             font-size: 3rem;
             font-weight: 900;
             color: white;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 0.8s ease;
         }
         
         .hero-subtitle {
             font-size: 1.8rem;
             font-weight: 700;
-            color: #d4af37; /* لون ذهبي */
+            color: var(--accent);
             margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 0.8s ease 0.2s both;
         }
         
         .hero-description {
             font-size: 1.2rem;
             opacity: 0.9;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             color: #e2e8f0;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 0.8s ease 0.4s both;
         }
         
-        .container { 
-            margin-top: -40px; 
-            position: relative; 
+        /* الرسوم المتحركة للعناوين */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: -40px auto 60px;
+            padding: 0 20px;
+            position: relative;
             z-index: 10;
-            padding-bottom: 40px;
+            animation: fadeIn 1s ease 0.6s both;
         }
         
-        /* شريط التقدم الحقيقي */
-        .progress-container {
-            background: #e2e8f0;
-            border-radius: 20px;
-            height: 12px;
-            margin: 15px 0 5px 0;
-            width: 100%;
-            overflow: hidden;
-            border: 1px solid rgba(0,0,0,0.1);
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
-        #index-progress-bar {
-            width: 0%;
-            height: 100%;
-            background: linear-gradient(90deg, #d4af37, #b8860b);
-            transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
-            border-radius: 20px;
+        
+        /* شبكة البطاقات */
+        .main-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
         }
-
-        /* كروت المواد */
+        
+        /* بطاقات المواد محسنة */
         .subject-card {
             background: white;
-            border-radius: 20px;
+            border-radius: var(--border-radius);
             padding: 25px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
             text-align: center;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .subject-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), transparent);
+            border-radius: 0 0 0 100%;
         }
         
         .subject-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--accent);
         }
         
-        /* باقي التنسيقات */
-        .card-disabled {
-            opacity: 0.7;
-            filter: grayscale(0.6);
-            border: 2px dashed #94a3b8 !important;
-            pointer-events: none;
+        /* البادجات */
+        .badge {
+            background: var(--success);
+            color: white;
+            padding: 6px 15px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 900;
+            display: inline-block;
+            margin-bottom: 15px;
+            align-self: flex-start;
+            box-shadow: 0 4px 10px rgba(34, 197, 94, 0.3);
         }
+        
         .badge-soon {
-            background: #64748b !important;
+            background: var(--info) !important;
+            box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);
         }
         
-        /* النافبار يفضل ثابت */
-        .navbar {
-            position: fixed;
-            top: 0;
+        .card-icon {
+            font-size: 3.5rem;
+            margin: 15px 0;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+        }
+        
+        .subject-card h3 {
+            color: var(--primary);
+            margin-bottom: 8px;
+            font-size: 1.4rem;
+            font-weight: 900;
+            line-height: 1.3;
+        }
+        
+        .subject-card p {
+            color: var(--gray);
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            flex-grow: 1;
+        }
+        
+        /* أشرطة التقدم */
+        .progress-container {
+            background: var(--gray-light);
+            border-radius: 20px;
+            height: 12px;
+            margin: 15px 0 8px;
             width: 100%;
-            z-index: 1000;
+            overflow: hidden;
+            position: relative;
         }
         
-        /* ستايلات المودال */
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+            border-radius: 20px;
+            transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.3), 
+                transparent);
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        /* أشرطة التقدم بألوان مختلفة */
+        #math-progress-bar {
+            background: linear-gradient(90deg, #00b09b, #96c93d);
+            box-shadow: 0 0 10px rgba(150, 201, 61, 0.4);
+        }
+        
+        #management-progress-bar {
+            background: linear-gradient(90deg, #9d50bb, #6e48aa);
+            box-shadow: 0 0 10px rgba(157, 80, 187, 0.4);
+        }
+        
+        #literature-progress-bar {
+            background: linear-gradient(90deg, #ff9966, #ff5e62);
+            box-shadow: 0 0 10px rgba(255, 94, 98, 0.4);
+        }
+        
+        #oop-progress-bar {
+            background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+            box-shadow: 0 0 10px rgba(0, 210, 255, 0.4);
+        }
+        
+        #circuits-progress-bar {
+            background: linear-gradient(90deg, #fce043, #fb7419);
+            box-shadow: 0 0 10px rgba(251, 116, 25, 0.4);
+        }
+        
+        .progress-text {
+            font-size: 0.85rem;
+            font-weight: 900;
+            color: var(--primary);
+            margin-bottom: 20px;
+            text-align: right;
+        }
+        
+        /* أزرار الدخول */
+        .card-actions {
+            margin-top: auto;
+        }
+        
+        .btn-enter {
+            background: var(--primary);
+            color: white;
+            padding: 14px 20px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 1rem;
+            display: block;
+            text-align: center;
+            transition: var(--transition);
+            border: 2px solid var(--primary);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-enter:hover {
+            background: white;
+            color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.2);
+        }
+        
+        .btn-enter:active {
+            transform: translateY(-1px);
+        }
+        
+        .btn-enter.oop-btn {
+            background: #3a7bd5;
+            border-color: #3a7bd5;
+        }
+        
+        .btn-enter.oop-btn:hover {
+            background: white;
+            color: #3a7bd5;
+        }
+        
+        .btn-enter.circuits-btn {
+            background: #fb7419;
+            border-color: #fb7419;
+        }
+        
+        .btn-enter.circuits-btn:hover {
+            background: white;
+            color: #fb7419;
+        }
+        
+        .btn-enter.math-btn {
+            background: #00b09b;
+            border-color: #00b09b;
+        }
+        
+        .btn-enter.math-btn:hover {
+            background: white;
+            color: #00b09b;
+        }
+        
+        .btn-enter.management-btn {
+            background: #9d50bb;
+            border-color: #9d50bb;
+        }
+        
+        .btn-enter.management-btn:hover {
+            background: white;
+            color: #9d50bb;
+        }
+        
+        .btn-enter.literature-btn {
+            background: #ff5e62;
+            border-color: #ff5e62;
+        }
+        
+        .btn-enter.literature-btn:hover {
+            background: white;
+            color: #ff5e62;
+        }
+        
+        /* المودال */
         .modal-overlay {
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(15, 23, 42, 0.9);
+            background: rgba(15, 23, 42, 0.95);
             backdrop-filter: blur(10px);
-            z-index: 9000;
+            z-index: 9999;
             align-items: center;
             justify-content: center;
             padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
         
         .modal-overlay.show {
             display: flex;
-            animation: fadeIn 0.3s ease;
+            opacity: 1;
+            animation: modalFadeIn 0.3s ease;
+        }
+        
+        @keyframes modalFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         
         .modal-content {
@@ -140,71 +474,260 @@
             max-width: 500px;
             text-align: center;
             box-shadow: 0 25px 50px rgba(0,0,0,0.3);
-            animation: slideUp 0.4s ease;
+            animation: modalSlideUp 0.4s ease;
+            position: relative;
+            border: 2px solid var(--accent);
+        }
+        
+        @keyframes modalSlideUp {
+            from {
+                transform: translateY(30px) scale(0.95);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
         }
         
         .close-btn {
             position: absolute;
             top: 20px;
             left: 20px;
-            font-size: 30px;
-            color: #64748b;
+            font-size: 28px;
+            color: var(--gray);
             cursor: pointer;
             background: none;
             border: none;
             font-weight: bold;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        
+        .close-btn:hover {
+            background: var(--gray-light);
+            color: var(--primary);
+            transform: rotate(90deg);
+        }
+        
+        .modal-content h2 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            font-weight: 900;
+        }
+        
+        .modal-subtitle {
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
         }
         
         .modal-options {
             margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
         
         .option-item {
             display: flex;
             align-items: center;
-            background: #f8fafc;
+            background: var(--light);
             padding: 20px;
             border-radius: 18px;
             text-decoration: none;
-            margin-bottom: 15px;
             border: 2px solid transparent;
-            transition: all 0.3s;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .option-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), transparent);
+            border-radius: 0 0 0 100%;
         }
         
         .option-item:hover {
             background: white;
-            border-color: #0ea5e9;
+            border-color: var(--accent);
             transform: translateX(-10px);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.15);
         }
         
         .opt-icon {
             font-size: 2rem;
             margin-left: 15px;
+            color: var(--accent);
+            flex-shrink: 0;
         }
         
         .opt-info {
             text-align: right;
+            flex-grow: 1;
         }
         
         .opt-info h4 {
-            color: #0f172a;
+            color: var(--primary);
             font-size: 1.2rem;
             margin-bottom: 5px;
+            font-weight: 900;
         }
         
         .opt-info span {
-            color: #64748b;
+            color: var(--gray);
             font-size: 0.9rem;
+            font-weight: 600;
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        /* الفوتر */
+        .footer {
+            text-align: center;
+            padding: 25px 20px;
+            color: var(--gray);
+            font-size: 0.9rem;
+            background: white;
+            border-top: 1px solid var(--gray-light);
+            margin-top: 40px;
         }
         
-        @keyframes slideUp {
-            from { transform: translateY(30px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        /* تحسينات للجوال */
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 90px 15px 50px;
+            }
+            
+            .hero-section h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.4rem;
+            }
+            
+            .hero-description {
+                font-size: 1rem;
+                padding: 0 10px;
+            }
+            
+            .nav-container {
+                padding: 10px 15px;
+            }
+            
+            .uni-name {
+                font-size: 1rem;
+            }
+            
+            .app-tag {
+                font-size: 0.7rem;
+            }
+            
+            .main-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .container {
+                margin: -30px auto 40px;
+                padding: 0 15px;
+            }
+            
+            .subject-card {
+                padding: 20px;
+            }
+            
+            .modal-content {
+                padding: 30px 20px;
+                margin: 0 10px;
+            }
+            
+            .option-item {
+                padding: 16px;
+            }
+        }
+        
+        /* تحسينات للشاشات الصغيرة جداً */
+        @media (max-width: 480px) {
+            .hero-section h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .card-icon {
+                font-size: 3rem;
+            }
+            
+            .subject-card h3 {
+                font-size: 1.3rem;
+            }
+            
+            .btn-enter {
+                padding: 12px 16px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* تحسينات للشاشات الكبيرة */
+        @media (min-width: 1400px) {
+            .container, .nav-container {
+                max-width: 1300px;
+            }
+        }
+        
+        /* تحسينات للوضع الداكن */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #0f172a;
+            }
+            
+            .subject-card, .modal-content, .footer {
+                background: #1e293b;
+                color: #f1f5f9;
+            }
+            
+            .subject-card h3, .modal-content h2, .opt-info h4 {
+                color: #f1f5f9;
+            }
+            
+            .subject-card p, .opt-info span {
+                color: #cbd5e1;
+            }
+            
+            .navbar {
+                background: #1e293b;
+                border-bottom: 1px solid #334155;
+            }
+            
+            .uni-name {
+                color: #f1f5f9;
+            }
+            
+            .progress-container {
+                background: #334155;
+            }
+            
+            .option-item {
+                background: #334155;
+            }
+            
+            .option-item:hover {
+                background: #475569;
+            }
         }
     </style>
 </head>
@@ -217,15 +740,15 @@
                 <span class="app-tag">بوابة الطالب الذكية</span>
             </div>
             <div class="user-profile">
-                <img src="uni-logo.png" alt="لوجو جامعة المنصورة الجديدة" class="navbar-logo">
+                <img src="uni-logo.png" alt="شعار الجامعة" class="navbar-logo">
             </div>
         </div>
     </nav>
 
     <header class="hero-section">
-        <h1>اهلا بيك</h1>
+        <h1>أهلاً بك</h1>
         <div class="hero-subtitle">NMU - Computer Science 2026</div>
-        <p class="hero-description">اختر المادة الدراسية لتبدأ المذاكرة والتدريب</p>
+        <p class="hero-description">اختر المادة الدراسية لتبدأ رحلتك التعليمية</p>
     </header>
 
     <main class="container">
@@ -233,88 +756,113 @@
             
             <!-- مادة الاحتمالات والإحصاء -->
             <div class="subject-card">
-                <span class="badge" style="background: #22c55e; color: white; padding: 6px 15px; border-radius: 20px; font-size: 0.85rem; font-weight: 700;">متاح الآن 🔥</span>
-                <div class="card-icon" style="font-size: 3rem; margin: 15px 0;">📊</div>
-                <h3 style="color: #0f172a; margin-bottom: 5px;">الاحتمالات والإحصاء</h3>
-                <p style="color: #64748b; margin-bottom: 20px;">Probability & Statistics</p>
+                <span class="badge">متاح الآن 🔥</span>
+                <div class="card-icon">📊</div>
+                <h3>الاحتمالات والإحصاء</h3>
+                <p>Probability & Statistics</p>
                 
                 <!-- شريط التقدم -->
                 <div class="progress-container">
-                    <div id="index-progress-bar"></div>
+                    <div class="progress-bar" id="stats-progress-bar"></div>
                 </div>
-                <p id="progress-text" style="font-size: 0.9rem; font-weight: 800; color: #0f172a; margin: 10px 0 20px 0;">0% مكتمل</p>
+                <div class="progress-text" id="stats-progress-text">0% مكتمل</div>
 
-                <a href="javascript:void(0)" onclick="toggleModal()" class="btn-enter" style="display: block; background: #0f172a; color: white; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 700; text-align: center;">دخول المادة</a>
+                <div class="card-actions">
+                    <a href="javascript:void(0)" onclick="toggleModal('stats')" class="btn-enter">دخول المادة</a>
+                </div>
             </div>
 
-            <!-- المواد المعطلة -->
-            <div class="subject-card card-disabled">
-                <span class="badge" style="background: #64748b; color: white; padding: 6px 15px; border-radius: 20px; font-size: 0.85rem; font-weight: 700;">قريباً ⏳</span>
-                <div class="card-icon" style="font-size: 3rem; margin: 15px 0;">💻</div>
-                <h3 style="color: #0f172a; margin-bottom: 5px;">البرمجة كائنية التوجه</h3>
-                <p style="color: #64748b; margin-bottom: 20px;">Object Oriented Programming</p>
-                <div style="background: #e2e8f0; height: 8px; border-radius: 10px; margin: 20px 0;">
-                    <div style="background: #94a3b8; height: 100%; width: 0%; border-radius: 10px;"></div>
+            <!-- مادة البرمجة كائنية التوجه -->
+            <div class="subject-card">
+                <span class="badge">متاح الآن 🔥</span>
+                <div class="card-icon">💻</div>
+                <h3>البرمجة كائنية التوجه</h3>
+                <p>Object Oriented Programming</p>
+                
+                <div class="progress-container">
+                    <div class="progress-bar" id="oop-progress-bar"></div>
                 </div>
-                <a href="#" class="btn-enter disabled" style="display: block; background: #94a3b8; color: white; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 700; text-align: center; cursor: not-allowed;">قيد التجهيز</a>
+                <div class="progress-text" id="oop-progress-text">0% مكتمل</div>
+
+                <div class="card-actions">
+                    <a href="javascript:void(0)" onclick="toggleModal('oop')" class="btn-enter oop-btn">دخول المادة</a>
+                </div>
             </div>
 
-            <div class="subject-card card-disabled">
-                <span class="badge" style="background: #64748b; color: white; padding: 6px 15px; border-radius: 20px; font-size: 0.85rem; font-weight: 700;">قريباً ⏳</span>
-                <div class="card-icon" style="font-size: 3rem; margin: 15px 0;">⚡</div>
-                <h3 style="color: #0f172a; margin-bottom: 5px;">الدوائر الكهربية والإلكترونية</h3>
-                <p style="color: #64748b; margin-bottom: 20px;">Electric & Electronic circuits</p>
-                <div style="background: #e2e8f0; height: 8px; border-radius: 10px; margin: 20px 0;">
-                    <div style="background: #94a3b8; height: 100%; width: 0%; border-radius: 10px;"></div>
+            <!-- مادة الدوائر الكهربية -->
+            <div class="subject-card">
+                <span class="badge">متاح الآن 🔥</span>
+                <div class="card-icon">⚡</div>
+                <h3>الدوائر الكهربية والإلكترونية</h3>
+                <p>Electrical and Electronic Circuits</p>
+                
+                <div class="progress-container">
+                    <div class="progress-bar" id="circuits-progress-bar"></div>
                 </div>
-                <a href="#" class="btn-enter disabled" style="display: block; background: #94a3b8; color: white; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 700; text-align: center; cursor: not-allowed;">قيد التجهيز</a>
+                <div class="progress-text" id="circuits-progress-text">0% مكتمل</div>
+
+                <div class="card-actions">
+                    <a href="javascript:void(0)" onclick="toggleModal('circuits')" class="btn-enter circuits-btn">دخول المادة</a>
+                </div>
             </div>
 
-            <div class="subject-card card-disabled">
-                <span class="badge" style="background: #64748b; color: white; padding: 6px 15px; border-radius: 20px; font-size: 0.85rem; font-weight: 700;">قريباً ⏳</span>
-                <div class="card-icon" style="font-size: 3rem; margin: 15px 0;">📐</div>
-                <h3 style="color: #0f172a; margin-bottom: 5px;">الرياضيات II</h3>
-                <p style="color: #64748b; margin-bottom: 20px;">Mathematics II</p>
-                <div style="background: #e2e8f0; height: 8px; border-radius: 10px; margin: 20px 0;">
-                    <div style="background: #94a3b8; height: 100%; width: 0%; border-radius: 10px;"></div>
+            <!-- الرياضيات II - أصبحت متاحة الآن -->
+            <div class="subject-card">
+                <span class="badge">متاح الآن 🔥</span>
+                <div class="card-icon">📐</div>
+                <h3>الرياضيات II</h3>
+                <p>Mathematics II</p>
+                <div class="progress-container">
+                    <div class="progress-bar" id="math-progress-bar"></div>
                 </div>
-                <a href="#" class="btn-enter disabled" style="display: block; background: #94a3b8; color: white; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 700; text-align: center; cursor: not-allowed;">قيد التجهيز</a>
+                <div class="progress-text" id="math-progress-text">0% مكتمل</div>
+                <div class="card-actions">
+                    <a href="javascript:void(0)" onclick="toggleModal('math')" class="btn-enter math-btn">دخول المادة</a>
+                </div>
             </div>
 
-            <div class="subject-card card-disabled">
-                <span class="badge" style="background: #64748b; color: white; padding: 6px 15px; border-radius: 20px; font-size: 0.85rem; font-weight: 700;">قريباً ⏳</span>
-                <div class="card-icon" style="font-size: 3rem; margin: 15px 0;">👔</div>
-                <h3 style="color: #0f172a; margin-bottom: 5px;">مقدمة في الإدارة</h3>
-                <p style="color: #64748b; margin-bottom: 20px;">Introduction to management</p>
-                <div style="background: #e2e8f0; height: 8px; border-radius: 10px; margin: 20px 0;">
-                    <div style="background: #94a3b8; height: 100%; width: 0%; border-radius: 10px;"></div>
+            <!-- مقدمة في الإدارة - أصبحت متاحة الآن -->
+            <div class="subject-card">
+                <span class="badge">متاح الآن 🔥</span>
+                <div class="card-icon">👔</div>
+                <h3>مقدمة في الإدارة</h3>
+                <p>Introduction to management</p>
+                <div class="progress-container">
+                    <div class="progress-bar" id="management-progress-bar"></div>
                 </div>
-                <a href="#" class="btn-enter disabled" style="display: block; background: #94a3b8; color: white; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 700; text-align: center; cursor: not-allowed;">قيد التجهيز</a>
+                <div class="progress-text" id="management-progress-text">0% مكتمل</div>
+                <div class="card-actions">
+                    <a href="javascript:void(0)" onclick="toggleModal('management')" class="btn-enter management-btn">دخول المادة</a>
+                </div>
             </div>
 
-            <div class="subject-card card-disabled">
-                <span class="badge" style="background: #64748b; color: white; padding: 6px 15px; border-radius: 20px; font-size: 0.85rem; font-weight: 700;">قريباً ⏳</span>
-                <div class="card-icon" style="font-size: 3rem; margin: 15px 0;">📜</div>
-                <h3 style="color: #0f172a; margin-bottom: 5px;">التذوق الأدبي</h3>
-                <p style="color: #64748b; margin-bottom: 20px;">Literature Appreciation</p>
-                <div style="background: #e2e8f0; height: 8px; border-radius: 10px; margin: 20px 0;">
-                    <div style="background: #94a3b8; height: 100%; width: 0%; border-radius: 10px;"></div>
+            <!-- التذوق الأدبي - أصبحت متاحة الآن -->
+            <div class="subject-card">
+                <span class="badge">متاح الآن 🔥</span>
+                <div class="card-icon">📜</div>
+                <h3>التذوق الأدبي</h3>
+                <p>Literature Appreciation</p>
+                <div class="progress-container">
+                    <div class="progress-bar" id="literature-progress-bar"></div>
                 </div>
-                <a href="#" class="btn-enter disabled" style="display: block; background: #94a3b8; color: white; padding: 12px; border-radius: 12px; text-decoration: none; font-weight: 700; text-align: center; cursor: not-allowed;">قيد التجهيز</a>
+                <div class="progress-text" id="literature-progress-text">0% مكتمل</div>
+                <div class="card-actions">
+                    <a href="javascript:void(0)" onclick="toggleModal('literature')" class="btn-enter literature-btn">دخول المادة</a>
+                </div>
             </div>
 
         </div>
     </main>
 
     <!-- المودال الخاص باختيار وجهة المادة -->
-    <div id="subjectModal" class="modal-overlay">
+    <div id="subjectModal" class="modal-overlay" onclick="if(event.target===this) toggleModal()">
         <div class="modal-content">
-            <span class="close-btn" onclick="toggleModal()">&times;</span>
+            <button class="close-btn" onclick="toggleModal()">&times;</button>
             <h2>اختر وجهتك يا بشمهندس 🚀</h2>
-            <p style="color: #64748b; margin-bottom: 30px;">مادة الاحتمالات والإحصاء</p>
+            <div class="modal-subtitle" id="modalSubTitle">مادة الاحتمالات والإحصاء</div>
             
             <div class="modal-options">
-                <a href="statistics.html" class="option-item">
+                <a href="#" class="option-item" id="contentLink" onclick="redirectToContent()">
                     <div class="opt-icon">📚</div>
                     <div class="opt-info">
                         <h4>محتوى المادة</h4>
@@ -322,61 +870,529 @@
                     </div>
                 </a>
 
-                <a href="exercises.html" class="option-item" style="background: linear-gradient(135deg, #d4af37, #b8860b);">
-    <div class="opt-icon" style="color: #003366; font-size: 2.2rem;">📝</div>
-    <div class="opt-info">
-        <h4 style="color: #003366; font-weight: 900; font-size: 1.3rem;">بنك التدريبات</h4>
-        <span style="color: #1e293b; font-weight: 800; font-size: 1rem;">اختبارات تفاعلية ومراجعات شاملة</span>
-    </div>
-</a>
+                <a href="#" class="option-item" id="exercisesLink" onclick="redirectToExercises()">
+                    <div class="opt-icon" style="color: #d4af37;">📝</div>
+                    <div class="opt-info">
+                        <h4 style="color: #0f172a;">بنك التدريبات</h4>
+                        <span style="color: #1e293b;">اختبارات تفاعلية ومراجعات شاملة</span>
+                    </div>
+                </a>
             </div>
         </div>
     </div>
 
-    <footer class="footer" style="text-align: center; padding: 20px; color: #64748b; font-size: 0.9rem; background: #f8fafc; margin-top: 40px;">
-        <p>جميع الحقوق محفوظة معرفش فين هما بيقولوا كدة</p>
+    <footer class="footer">
+        <p>© 2023 جامعة المنصورة الجديدة - بوابة الطالب الذكية. جميع الحقوق محفوظة.</p>
     </footer>
 
     <script>
-        // تأكد من تحميل الخط أولاً
-        document.fonts.ready.then(function() {
-            updateIndexProgress();
-        });
-
-        function updateIndexProgress() {
-            const bar = document.getElementById('index-progress-bar');
-            const text = document.getElementById('progress-text');
-            const totalTasks = 29; 
-            const completed = JSON.parse(localStorage.getItem('stats_progress')) || [];
-            let percentage = Math.round((completed.length / totalTasks) * 100);
-            if (percentage > 100) percentage = 100;
-
-            if (bar && text) {
-                setTimeout(() => {
-                    bar.style.width = percentage + '%';
-                    text.innerText = percentage + '% مكتمل';
-                }, 500);
+    // متغيرات التخزين المحدثة - الإحصاء
+    const progressData = {
+        stats: {
+            total: 29, // إجمالي 29 عنصراً (10 محاضرات × 3 عناصر لكل محاضرة تقريباً)
+            key: 'stat_progress',
+            bar: 'stats-progress-bar',
+            text: 'stats-progress-text',
+            name: 'الإحصاء',
+            color: '#0ea5e9' // أزرق سماوي
+        },
+        oop: {
+            total: 25,
+            key: 'oop_progress',
+            bar: 'oop-progress-bar',
+            text: 'oop-progress-text',
+            name: 'البرمجة كائنية',
+            color: '#3a7bd5'
+        },
+        circuits: {
+            total: 20,
+            key: 'circuits_progress',
+            bar: 'circuits-progress-bar',
+            text: 'circuits-progress-text',
+            name: 'الدوائر',
+            color: '#fb7419'
+        },
+        math: {
+            total: 26,
+            key: 'math_progress',
+            bar: 'math-progress-bar',
+            text: 'math-progress-text',
+            name: 'الرياضيات',
+            color: '#00b09b'
+        },
+        management: {
+            total: 18,
+            key: 'management_progress',
+            bar: 'management-progress-bar',
+            text: 'management-progress-text',
+            name: 'الإدارة',
+            color: '#9d50bb'
+        },
+        literature: {
+            total: 15,
+            key: 'literature_progress',
+            bar: 'literature-progress-bar',
+            text: 'literature-progress-text',
+            name: 'الأدب',
+            color: '#ff5e62'
+        }
+    };
+    
+    // موضوع المودال الحالي
+    let currentSubject = 'stats';
+    
+    // دالة ذكية لتحديث التقدم - خاصة بالإحصاء
+    function updateProgress(subject) {
+        const data = progressData[subject];
+        if (!data) {
+            console.error('❌ المادة غير موجودة:', subject);
+            return { percentage: 0, completed: 0, total: 0 };
+        }
+        
+        const bar = document.getElementById(data.bar);
+        const text = document.getElementById(data.text);
+        
+        if (!bar || !text) {
+            console.error('❌ عناصر HTML غير موجودة للمادة:', subject);
+            return { percentage: 0, completed: 0, total: 0 };
+        }
+        
+        // الحصول على البيانات المحفوظة
+        let completedItems = [];
+        try {
+            const stored = localStorage.getItem(data.key);
+            completedItems = stored ? JSON.parse(stored) : [];
+            
+            // التحقق من صحة البيانات
+            if (!Array.isArray(completedItems)) {
+                console.warn('⚠️ بيانات غير صالحة للمادة', subject, 'إعادة تعيين...');
+                completedItems = [];
+                localStorage.setItem(data.key, JSON.stringify(completedItems));
+            }
+        } catch (error) {
+            console.error('❌ خطأ في قراءة localStorage:', error);
+            completedItems = [];
+        }
+        
+        // حساب النسبة المئوية - مع تحديد حقيقي للمادة
+        let completedCount = completedItems.length;
+        let totalItems = data.total;
+        
+        // معالجة خاصة لمادة الإحصاء
+        if (subject === 'stats') {
+            // التأكد من أن عدد العناصر المكتملة لا يتجاوز العدد الكلي
+            completedCount = Math.min(completedCount, totalItems);
+            
+            // إزالة العناصر المكررة
+            const uniqueItems = [...new Set(completedItems)];
+            completedCount = uniqueItems.length;
+            
+            // تحديث localStorage بالقيم الفريدة فقط
+            if (completedItems.length !== uniqueItems.length) {
+                localStorage.setItem(data.key, JSON.stringify(uniqueItems));
             }
         }
-
-        function toggleModal() {
+        
+        const percentage = Math.min(Math.round((completedCount / totalItems) * 100), 100);
+        
+        // تسجيل بيانات التصحيح
+        console.log(`📊 ${subject} (${data.name}): ${completedCount}/${totalItems} = ${percentage}%`);
+        
+        // تحديث العناصر المرئية
+        bar.style.width = percentage + '%';
+        
+        // تحديث لون شريط التقدم لكل مادة
+        if (subject === 'stats') {
+            bar.style.background = 'linear-gradient(90deg, #0ea5e9, #0284c7)';
+            bar.style.boxShadow = '0 0 10px rgba(14, 165, 233, 0.4)';
+        }
+        
+        text.textContent = percentage + '% مكتمل';
+        
+        // إضافة تأثير إذا كانت النسبة 100%
+        if (percentage === 100) {
+            bar.style.animation = 'pulse 2s infinite';
+            text.innerHTML = '🎉 100% مكتمل!';
+            text.style.color = '#22c55e';
+            text.style.fontWeight = '900';
+        } else {
+            bar.style.animation = '';
+            text.style.color = '';
+            text.style.fontWeight = '';
+        }
+        
+        // إرجاع البيانات للإستخدام
+        return {
+            percentage,
+            completed: completedCount,
+            total: totalItems,
+            items: completedItems
+        };
+    }
+    
+    // تحديث جميع أشرطة التقدم
+    function refreshAllProgress() {
+        console.log('🔄 تحديث جميع أشرطة التقدم...');
+        Object.keys(progressData).forEach(subject => {
+            updateProgress(subject);
+        });
+    }
+    
+    // دالة خاصة لتحديث الإحصاء
+    window.updateStatProgress = function() {
+        console.log('📊 تحديث تقدم الإحصاء من صفحة أخرى...');
+        return updateProgress('stats');
+    };
+    
+    // دالة عامة لتحديث أي مادة
+    window.updateSubjectProgress = function(subject) {
+        console.log(`🎯 تحديث تقدم ${subject}...`);
+        return updateProgress(subject);
+    };
+    
+    // إدارة المودال
+    function toggleModal(subject = 'stats') {
+        currentSubject = subject;
+        const modal = document.getElementById('subjectModal');
+        const modalSubTitle = document.getElementById('modalSubTitle');
+        
+        // تحديث عنوان المودال
+        const titles = {
+            stats: 'مادة الاحتمالات والإحصاء 📊',
+            oop: 'مادة البرمجة كائنية التوجه 💻',
+            circuits: 'مادة الدوائر الكهربية والإلكترونية ⚡',
+            math: 'مادة الرياضيات II 📐',
+            management: 'مادة مقدمة في الإدارة 👔',
+            literature: 'مادة التذوق الأدبي 📜'
+        };
+        
+        if (titles[subject]) {
+            modalSubTitle.textContent = titles[subject];
+        }
+        
+        // تحديث روابط المودال بناءً على المادة المختارة
+        const contentLink = document.getElementById('contentLink');
+        const exercisesLink = document.getElementById('exercisesLink');
+        
+        const contentPages = {
+            stats: 'statistics.html',
+            oop: 'oop_content.html',
+            circuits: 'circuits_content.html',
+            math: 'math_content.html',
+            management: 'management_content.html',
+            literature: 'literature_content.html'
+        };
+        
+        const exercisePages = {
+            stats: 'statistics_exercises.html',
+            oop: 'oop_exercises.html',
+            circuits: 'circuits_exercises.html',
+            math: 'math_exercises.html',
+            management: 'management_exercises.html',
+            literature: 'literature_exercises.html'
+        };
+        
+        if (contentLink) contentLink.href = contentPages[subject] || '#';
+        if (exercisesLink) exercisesLink.href = exercisePages[subject] || '#';
+        
+        // تحديث إحصائيات المادة في المودال
+        const progressInfo = updateProgress(subject);
+        const statsElement = document.querySelector('.modal-options .opt-info span');
+        if (statsElement && progressInfo) {
+            statsElement.textContent = `تم إكمال ${progressInfo.completed} من ${progressInfo.total} عنصر`;
+        }
+        
+        // تبديل عرض المودال
+        if (modal.classList.contains('show')) {
+            modal.classList.remove('show');
+            setTimeout(() => modal.style.display = 'none', 300);
+        } else {
+            modal.style.display = 'flex';
+            setTimeout(() => modal.classList.add('show'), 10);
+        }
+    }
+    
+    // إعادة توجيه إلى صفحة المحتوى
+    function redirectToContent() {
+        const pages = {
+            stats: 'statistics.html',
+            oop: 'oop_content.html',
+            circuits: 'circuits_content.html',
+            math: 'math_content.html',
+            management: 'management_content.html',
+            literature: 'literature_content.html'
+        };
+        
+        const page = pages[currentSubject] || 'index.html';
+        window.location.href = page;
+    }
+    
+    // إعادة توجيه إلى صفحة التدريبات
+    function redirectToExercises() {
+        const pages = {
+            stats: 'statistics_exercises.html',
+            oop: 'oop_exercises.html',
+            circuits: 'circuits_exercises.html',
+            math: 'math_exercises.html',
+            management: 'management_exercises.html',
+            literature: 'literature_exercises.html'
+        };
+        
+        const page = pages[currentSubject] || 'index.html';
+        window.location.href = page;
+    }
+    
+    // إغلاق المودال عند النقر خارج المحتوى
+    document.addEventListener('click', function(event) {
+        const modal = document.getElementById('subjectModal');
+        if (event.target === modal) {
+            modal.classList.remove('show');
+            setTimeout(() => modal.style.display = 'none', 300);
+        }
+    });
+    
+    // إغلاق المودال عند الضغط على زر ESC
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
             const modal = document.getElementById('subjectModal');
             if (modal.classList.contains('show')) {
                 modal.classList.remove('show');
                 setTimeout(() => modal.style.display = 'none', 300);
-            } else {
-                modal.style.display = 'flex';
-                setTimeout(() => modal.classList.add('show'), 10);
             }
         }
-
-        window.onclick = function(event) {
-            const modal = document.getElementById('subjectModal');
-            if (event.target == modal) toggleModal();
+    });
+    
+    // اختبار دالة الإحصاء
+    window.testStatProgress = function() {
+        console.log('🧪 اختبار تقدم الإحصاء...');
+        
+        // إضافة عناصر اختبارية مختلفة للإحصاء
+        let statProgress = JSON.parse(localStorage.getItem('stat_progress')) || [];
+        
+        // إضافة عناصر متنوعة تشمل جميع أنواع المحتوى
+        const testItems = [
+            'stat_lec1_pdf',
+            'stat_lec1_vid',
+            'stat_lec1_tut',
+            'stat_lec2_pdf',
+            'stat_lec2_vid',
+            'stat_lec3_tut',
+            'stat_lec4_pdf',
+            'stat_lec5_vid'
+        ];
+        
+        let addedCount = 0;
+        testItems.forEach(item => {
+            if (!statProgress.includes(item)) {
+                statProgress.push(item);
+                addedCount++;
+                console.log(`✅ تم إضافة: ${item}`);
+            }
+        });
+        
+        if (addedCount > 0) {
+            localStorage.setItem('stat_progress', JSON.stringify(statProgress));
+            console.log(`✅ تم إضافة ${addedCount} عناصر تجريبية للإحصاء`);
+        } else {
+            console.log('ℹ️ جميع عناصر الاختبار موجودة مسبقاً');
         }
-
-        window.addEventListener('load', updateIndexProgress);
-        window.addEventListener('pageshow', updateIndexProgress);
-    </script>
+        
+        // تحديث العرض
+        const result = updateProgress('stats');
+        console.log('📊 نتيجة اختبار الإحصاء:', result);
+        
+        // إظهار إشعار
+        showNotification(`تم تحديث تقدم الإحصاء إلى ${result.percentage}%`);
+        
+        return result;
+    };
+    
+    // دالة لإظهار إشعارات
+    function showNotification(message) {
+        // إنشاء عنصر الإشعار
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #0ea5e9, #0284c7);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(14, 165, 233, 0.3);
+            z-index: 10000;
+            font-weight: bold;
+            animation: slideInNotification 0.3s ease;
+            max-width: 300px;
+            text-align: center;
+            border: 2px solid white;
+        `;
+        
+        notification.innerHTML = `<i class="fas fa-chart-line" style="margin-left: 8px;"></i> ${message}`;
+        document.body.appendChild(notification);
+        
+        // إزالة الإشعار بعد 3 ثوان
+        setTimeout(() => {
+            notification.style.animation = 'slideOutNotification 0.3s ease';
+            setTimeout(() => {
+                document.body.removeChild(notification);
+            }, 300);
+        }, 3000);
+    }
+    
+    // إضافة أنماط CSS للرسوم المتحركة
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideInNotification {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideOutNotification {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 5px rgba(14, 165, 233, 0.4); }
+            50% { box-shadow: 0 0 20px rgba(14, 165, 233, 0.8); }
+            100% { box-shadow: 0 0 5px rgba(14, 165, 233, 0.4); }
+        }
+        
+        #stats-progress-bar {
+            background: linear-gradient(90deg, #0ea5e9, #0284c7) !important;
+            box-shadow: 0 0 10px rgba(14, 165, 233, 0.4) !important;
+        }
+    `;
+    document.head.appendChild(style);
+    
+    // تهيئة الصفحة
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('🚀 بدء تحميل الصفحة الرئيسية...');
+        
+        // تحديث أشرطة التقدم
+        refreshAllProgress();
+        
+        // تحديث خاص للإحصاء
+        updateProgress('stats');
+        
+        // إضافة تأثيرات عند التمرير
+        const cards = document.querySelectorAll('.subject-card');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, index * 100);
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        cards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'all 0.6s ease';
+            observer.observe(card);
+        });
+        
+        // تحديث تلقائي كل 3 ثوان
+        setInterval(refreshAllProgress, 3000);
+        
+        // تحديث عند تلقي رسائل من الصفحات الأخرى
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'stat_updated' || e.key === 'force_refresh') {
+                console.log('🔄 تلقي تحديث من صفحة أخرى:', e.key);
+                refreshAllProgress();
+            }
+        });
+        
+        // عرض بيانات الإحصاء بعد تحميل الصفحة
+        setTimeout(() => {
+            const statData = JSON.parse(localStorage.getItem('stat_progress')) || [];
+            console.log('📊 بيانات الإحصاء المحفوظة:', statData);
+            console.log('📊 عدد عناصر الإحصاء:', statData.length);
+            
+            // تحديث شريط الإحصاء مباشرة
+            const statProgress = updateProgress('stats');
+            console.log('📊 حالة الإحصاء الحالية:', statProgress);
+        }, 2000);
+    });
+    
+    // تحديث عند العودة للصفحة
+    window.addEventListener('pageshow', function() {
+        console.log('🔄 تحديث الصفحة عند العودة...');
+        refreshAllProgress();
+    });
+    
+    // دالة لتفريغ بيانات الإحصاء (للتجربة)
+    window.resetStatProgress = function() {
+        localStorage.setItem('stat_progress', JSON.stringify([]));
+        console.log('🔄 تم تفريغ بيانات الإحصاء');
+        updateProgress('stats');
+        showNotification('تم تفريغ تقدم الإحصاء');
+    };
+    
+    // دالة لملء بيانات تجريبية للإحصاء
+    window.fillTestStatData = function(count = 10) {
+        let statProgress = JSON.parse(localStorage.getItem('stat_progress')) || [];
+        
+        // إنشاء عناصر متنوعة للإحصاء
+        const lectures = [1, 2, 3, 4, 5, 7, 8, 9, 10];
+        const types = ['pdf', 'vid', 'tut'];
+        
+        let added = 0;
+        for (let i = 0; i < count && added < 29; i++) {
+            const randomLec = lectures[Math.floor(Math.random() * lectures.length)];
+            const randomType = types[Math.floor(Math.random() * types.length)];
+            const newItem = `stat_lec${randomLec}_${randomType}`;
+            
+            if (!statProgress.includes(newItem)) {
+                statProgress.push(newItem);
+                added++;
+            }
+        }
+        
+        localStorage.setItem('stat_progress', JSON.stringify(statProgress));
+        console.log(`✅ تم إضافة ${added} عناصر تجريبية للإحصاء`);
+        
+        // تحديث العرض
+        updateProgress('stats');
+        showNotification(`تم إضافة ${added} عنصر للإحصاء`);
+        
+        return { added: added, total: statProgress.length };
+    };
+    
+    // دالة للحصول على تقرير تقدم الإحصاء
+    window.getStatReport = function() {
+        const progress = updateProgress('stats');
+        
+        const report = {
+            subject: 'الاحتمالات والإحصاء',
+            percentage: progress.percentage,
+            completed: progress.completed,
+            total: progress.total,
+            items: progress.items,
+            status: progress.percentage === 100 ? 'مكتملة 🎉' : 
+                   progress.percentage >= 70 ? 'متقدمة جيداً ✅' :
+                   progress.percentage >= 40 ? 'في تقدم ⏳' : 'مبتدئة 📚'
+        };
+        
+        console.log('📋 تقرير تقدم الإحصاء:', report);
+        return report;
+    };
+</script>
 </body>
 </html>
