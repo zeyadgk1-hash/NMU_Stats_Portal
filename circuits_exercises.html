@@ -1,0 +1,1510 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>بنك تدريبات الدوائر الكهربية والإلكترونية | جامعة المنصورة الجديدة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* إعادة ضبط كاملة */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #f97316;
+            --primary-dark: #ea580c;
+            --primary-light: #fdba74;
+            --accent: #d97706;
+            --accent-light: #fbbf24;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --gray-light: #e2e8f0;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --info: #3b82f6;
+            --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            --card-shadow-hover: 0 20px 40px rgba(249, 115, 22, 0.15);
+            --border-radius: 16px;
+        }
+        
+        body {
+            background: var(--light);
+            font-family: 'Cairo', sans-serif;
+            min-height: 100vh;
+            line-height: 1.6;
+            color: var(--dark);
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* النافبار محسّن */
+        .navbar {
+            background: white;
+            color: var(--dark);
+            padding: 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+            animation: slideDown 0.5s ease;
+        }
+        
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+        
+        .logo:hover {
+            transform: translateY(-2px);
+        }
+        
+        .logo-icon {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .uni-name { 
+            font-weight: 900; 
+            font-size: 1rem; 
+            color: var(--dark); 
+            line-height: 1.2;
+        }
+        
+        .app-tag { 
+            font-size: 0.75rem; 
+            color: var(--primary); 
+            font-weight: 700; 
+            margin-top: 2px;
+        }
+        
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        /* الزر الرئيسي محسّن */
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 10px 22px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 12px rgba(249, 115, 22, 0.2);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(249, 115, 22, 0.3);
+        }
+        
+        /* زر الإجراءات السريعة */
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            padding: 8px 16px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            border: 2px solid var(--gray-light);
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.85rem;
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            background: var(--primary-light);
+        }
+        
+        /* المحتوى الرئيسي */
+        .container {
+            max-width: 1200px;
+            margin: 100px auto 40px;
+            padding: 0 20px;
+            animation: fadeInUp 0.7s ease 0.2s both;
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* شريط الترحيب والإحصائيات */
+        .welcome-section {
+            background: linear-gradient(135deg, var(--dark), #1e293b);
+            color: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: var(--card-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .welcome-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.1), transparent);
+            border-radius: 50%;
+        }
+        
+        .welcome-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .welcome-text h1 {
+            font-size: 1.8rem;
+            font-weight: 900;
+            margin-bottom: 5px;
+        }
+        
+        .welcome-text p {
+            color: var(--primary-light);
+            font-size: 0.95rem;
+        }
+        
+        .quick-stats {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--primary-light);
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            color: #cbd5e1;
+        }
+        
+        /* شريط التقدم العام محسّن */
+        .overall-progress {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            margin-bottom: 40px;
+            box-shadow: var(--card-shadow);
+            border: 2px solid var(--primary-light);
+        }
+        
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .progress-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .progress-percentage {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--primary);
+        }
+        
+        .overall-progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--gray-light);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 10px;
+            position: relative;
+        }
+        
+        .overall-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 10px;
+            transition: width 1s ease;
+            box-shadow: 0 2px 10px rgba(249, 115, 22, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .overall-progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.3), 
+                transparent);
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .progress-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: var(--gray);
+            font-weight: 600;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        /* العناوين الرئيسية */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--dark);
+            font-size: 1.6rem;
+            font-weight: 900;
+            margin: 50px 0 30px 0;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--primary);
+            width: 100%;
+        }
+        
+        .section-icon {
+            background: var(--primary-light);
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.3rem;
+        }
+        
+        /* الجريد محسّن */
+        .main-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+        
+        /* كروت الكويزات محسنة */
+        .subject-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+        }
+        
+        .subject-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: var(--card-shadow-hover);
+            border-color: var(--primary);
+        }
+        
+        /* مؤشر الإكمال محسّن */
+        .completed-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--success);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+            z-index: 2;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+        
+        /* بادج المحاضرة */
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--dark), #1e293b);
+            color: white;
+            padding: 6px 18px;
+            border-radius: 50px;
+            font-weight: 900;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            border: 2px solid var(--primary);
+            align-self: flex-start;
+        }
+        
+        /* أيقونة البطاقة */
+        .card-icon {
+            font-size: 3.5rem;
+            margin: 15px 0 20px 0;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+        }
+        
+        /* عنوان البطاقة */
+        .subject-card h3 {
+            color: var(--dark);
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            line-height: 1.4;
+            text-align: center;
+            width: 100%;
+        }
+        
+        /* وصف البطاقة */
+        .subject-card p {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            flex-grow: 1;
+            text-align: center;
+        }
+        
+        /* شريط التقدم المصغر */
+        .progress-container {
+            width: 100%;
+            margin: 15px 0;
+        }
+        
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 0.85rem;
+        }
+        
+        .progress-label {
+            color: var(--gray);
+        }
+        
+        .progress-value {
+            color: var(--primary);
+            font-weight: 700;
+        }
+        
+        .mini-progress {
+            width: 100%;
+            height: 8px;
+            background: var(--gray-light);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .mini-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 4px;
+            transition: width 0.5s ease;
+            position: relative;
+        }
+        
+        /* زر البطاقة محسّن */
+        .card-actions {
+            width: 100%;
+            margin-top: auto;
+        }
+        
+        .btn-card {
+            background: linear-gradient(135deg, var(--dark), #1e293b);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            font-size: 0.95rem;
+            box-shadow: 0 5px 15px rgba(15, 23, 42, 0.2);
+            font-family: 'Cairo', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .btn-card:hover {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(249, 115, 22, 0.3);
+        }
+        
+        .btn-card.completed {
+            background: linear-gradient(135deg, var(--success), #059669);
+        }
+        
+        .btn-card.started {
+            background: linear-gradient(135deg, var(--warning), #d97706);
+        }
+        
+        /* زر المعطل */
+        .btn-disabled {
+            background: var(--gray-light) !important;
+            color: var(--gray) !important;
+            cursor: not-allowed !important;
+            opacity: 0.7;
+        }
+        
+        .btn-disabled:hover {
+            transform: none !important;
+            background: var(--gray-light) !important;
+            box-shadow: none !important;
+        }
+        
+        /* كروت خاصة للمراجعات */
+        .special-card {
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+            border: 2px solid var(--gray-light);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .special-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.1), transparent);
+            border-radius: 0 0 0 100%;
+        }
+        
+        .special-card.mid {
+            border-color: var(--accent);
+            background: linear-gradient(135deg, #ffedd5, #fed7aa);
+        }
+        
+        .special-card.final {
+            border-color: var(--info);
+            background: linear-gradient(135deg, #ecfeff, #cffafe);
+        }
+        
+        /* قسم المراجعات */
+        .review-section {
+            margin-top: 60px;
+        }
+        
+        /* نافذة الإجراءات السريعة */
+        .quick-actions {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .action-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .action-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        .action-tooltip {
+            position: absolute;
+            left: 60px;
+            background: var(--dark);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s;
+            pointer-events: none;
+        }
+        
+        .action-btn:hover .action-tooltip {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        /* الفوتر */
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: var(--gray);
+            font-size: 0.9rem;
+            background: white;
+            margin-top: 80px;
+            border-top: 1px solid var(--gray-light);
+            animation: fadeIn 0.8s ease 1.3s both;
+        }
+        
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            color: var(--dark);
+            font-weight: 700;
+        }
+        
+        /* تحسينات للموبايل */
+        @media (max-width: 1024px) {
+            .main-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 20px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 90px auto 30px;
+                padding: 0 15px;
+            }
+            
+            .nav-container {
+                padding: 10px 15px;
+            }
+            
+            .logo-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+            
+            .uni-name {
+                font-size: 0.9rem;
+            }
+            
+            .app-tag {
+                font-size: 0.7rem;
+            }
+            
+            .btn-primary {
+                padding: 8px 16px;
+                font-size: 0.85rem;
+            }
+            
+            .welcome-section {
+                padding: 20px;
+            }
+            
+            .welcome-text h1 {
+                font-size: 1.5rem;
+            }
+            
+            .quick-stats {
+                gap: 10px;
+            }
+            
+            .stat-item {
+                padding: 8px 15px;
+            }
+            
+            .stat-value {
+                font-size: 1.3rem;
+            }
+            
+            .section-header {
+                font-size: 1.4rem;
+                margin: 40px 0 25px;
+            }
+            
+            .section-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+            }
+            
+            .main-grid {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .subject-card {
+                padding: 20px;
+            }
+            
+            .card-icon {
+                font-size: 3rem;
+            }
+            
+            .subject-card h3 {
+                font-size: 1.3rem;
+            }
+            
+            .progress-percentage {
+                font-size: 1.3rem;
+            }
+            
+            .quick-actions {
+                left: 20px;
+                bottom: 20px;
+            }
+            
+            .action-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 1.1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .nav-actions {
+                gap: 10px;
+            }
+            
+            .btn-primary span {
+                display: none;
+            }
+            
+            .btn-primary {
+                padding: 10px;
+                border-radius: 50%;
+                width: 40px;
+                height: 40px;
+                justify-content: center;
+            }
+            
+            .welcome-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .quick-stats {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .stat-item {
+                flex: 1;
+                text-align: center;
+                padding: 8px 10px;
+            }
+            
+            .progress-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .progress-percentage {
+                align-self: flex-start;
+            }
+            
+            .progress-stats {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .section-header {
+                font-size: 1.3rem;
+            }
+            
+            .footer {
+                padding: 20px 15px;
+            }
+        }
+        
+        /* تحسينات للشاشات الكبيرة جداً */
+        @media (min-width: 1400px) {
+            .container, .nav-container {
+                max-width: 1300px;
+            }
+        }
+        
+        /* تأثيرات إضافية */
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        .shake {
+            animation: shake 0.5s ease;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
+        /* تحسينات الوصول */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        
+        /* تحسينات للأجهزة التي تفضل الحركة المخففة */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+        
+        /* وضع النجمة للمستخدمين المتميزين */
+        .starred {
+            position: relative;
+        }
+        
+        .starred::after {
+            content: '⭐';
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            font-size: 1.2rem;
+            z-index: 1;
+            animation: spin 4s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="exercises-page">
+    <!-- نافبار محسّن -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <div class="logo-text">
+                    <span class="uni-name">جامعة المنصورة الجديدة</span>
+                    <span class="app-tag">بنك تدريبات الدوائر الكهربية</span>
+                </div>
+            </a>
+            
+            <div class="nav-actions">
+                <button class="btn-secondary" onclick="resetProgress()" title="إعادة التعيين">
+                    <i class="fas fa-redo"></i>
+                    <span>إعادة</span>
+                </button>
+                <a href="index.html" class="btn-primary">
+                    <i class="fas fa-home"></i>
+                    <span>الرئيسية</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        
+        <!-- قسم الترحيب والإحصائيات -->
+        <section class="welcome-section">
+            <div class="welcome-header">
+                <div class="welcome-text">
+                    <h1>⚡ بنك تدريبات الدوائر الكهربية</h1>
+                    <p>تدرب، اختبر نفسك، وأتقن الدوائر الكهربية والإلكترونية خطوة بخطوة</p>
+                </div>
+                <div class="quick-stats">
+                    <div class="stat-item">
+                        <div class="stat-value" id="total-quizzes">9</div>
+                        <div class="stat-label">إجمالي التدريبات</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="completed-quizzes">0</div>
+                        <div class="stat-label">تم إكمالها</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="average-score">0%</div>
+                        <div class="stat-label">متوسط النتائج</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- شريط التقدم العام -->
+        <section class="overall-progress">
+            <div class="progress-header">
+                <div class="progress-title">
+                    <i class="fas fa-chart-line"></i>
+                    تقدمك العام في المادة
+                </div>
+                <div class="progress-percentage" id="overall-percentage">0%</div>
+            </div>
+            <div class="overall-progress-bar">
+                <div class="overall-progress-fill" id="overall-progress-fill" style="width: 0%"></div>
+            </div>
+            <div class="progress-stats">
+                <span id="completed-count">0/9 تم إكمالها</span>
+                <span id="total-time">الوقت الإجمالي: 0 ساعة</span>
+                <span id="last-activity">آخر نشاط: لم يبدأ بعد</span>
+            </div>
+        </section>
+        
+        <!-- تدريبات المحاضرات -->
+        <section class="lectures-section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-book-open"></i>
+                </div>
+                <h2>تدريبات المحاضرات الدراسية</h2>
+            </div>
+            
+            <div class="main-grid">
+                <!-- سيتم إضافة البطاقات ديناميكياً عبر JavaScript -->
+            </div>
+        </section>
+        
+        <!-- المراجعات والامتحانات الشاملة -->
+        <section class="review-section">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <h2>المراجعات والامتحانات الشاملة</h2>
+            </div>
+            
+            <div class="main-grid">
+                <!-- مراجعة الميدترم -->
+                <div class="subject-card special-card mid">
+                    <span class="badge">مراجعة شاملة</span>
+                    <div class="card-icon">🏁</div>
+                    <h3 style="color: #92400e;">Midterm Exam Review</h3>
+                    <p style="color: #b45309;">شامل لجميع دروس النصف الأول مع حلول مفصلة وتوقيت مماثل للامتحان</p>
+                    <div class="progress-container">
+                        <div class="progress-info">
+                            <span class="progress-label">الحالة</span>
+                            <span class="progress-value">قريباً ⏳</span>
+                        </div>
+                        <div class="mini-progress">
+                            <div class="mini-progress-fill" style="width: 30%"></div>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn-card btn-disabled" disabled>
+                            <i class="fas fa-lock"></i> جاري الإعداد
+                        </button>
+                    </div>
+                </div>
+
+                <!-- الامتحان النهائي الشامل -->
+                <div class="subject-card special-card final">
+                    <span class="badge" style="background: var(--info);">امتحان نهائي</span>
+                    <div class="card-icon">🏆</div>
+                    <h3 style="color: #0369a1;">Final Comprehensive Exam</h3>
+                    <p style="color: #0c4a6e;">اختبار شامل لمقرر الدوائر الكهربية والإلكترونية مع تقرير أداء مفصل</p>
+                    <div class="progress-container">
+                        <div class="progress-info">
+                            <span class="progress-label">الحالة</span>
+                            <span class="progress-value">قريباً ⏳</span>
+                        </div>
+                        <div class="mini-progress">
+                            <div class="mini-progress-fill" style="width: 15%"></div>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn-card btn-disabled" disabled>
+                            <i class="fas fa-lock"></i> تحت التطوير
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- إجراءات سريعة -->
+    <div class="quick-actions">
+        <button class="action-btn" onclick="scrollToTop()" title="الانتقال للأعلى">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        <button class="action-btn" onclick="showProgressSummary()" title="ملخص التقدم">
+            <i class="fas fa-chart-pie"></i>
+        </button>
+        <button class="action-btn" onclick="toggleDarkMode()" title="الوضع الداكن">
+            <i class="fas fa-moon"></i>
+        </button>
+    </div>
+
+    <!-- الفوتر -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <i class="fas fa-bolt" style="color: var(--primary);"></i>
+                <span>بنك تدريبات الدوائر الكهربية والإلكترونية</span>
+            </div>
+            <p>© 2023 جامعة المنصورة الجديدة - كلية الهندسة. جميع الحقوق محفوظة.</p>
+            <p>التدريب المنتظم هو مفتاح التفوق. استمر في المحاولة ولا تستسلم.</p>
+        </div>
+    </footer>
+    
+    <!-- نافذة ملخص التقدم -->
+    <div id="progressModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center;">
+        <div style="background: white; padding: 30px; border-radius: 20px; max-width: 500px; width: 90%; max-height: 80vh; overflow-y: auto;">
+            <h3 style="color: var(--dark); margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                <i class="fas fa-chart-bar" style="color: var(--primary);"></i>
+                ملخص تقدمك
+            </h3>
+            <div id="progressDetails" style="margin-bottom: 20px;"></div>
+            <button onclick="hideProgressSummary()" class="btn-card" style="width: auto; margin-top: 20px;">
+                <i class="fas fa-times"></i> إغلاق
+            </button>
+        </div>
+    </div>
+    
+    <script>
+    // بيانات التخزين
+    const QUIZ_DATA = [
+        {
+            id: 1,
+            title: "Introduction to Electrical Circuits",
+            description: "أساسيات الدوائر الكهربية والعناصر الأساسية مثل المقاومة والمكثف والمحث",
+            icon: "🔌",
+            color: "#f97316"
+        },
+        {
+            id: 2,
+            title: "KCL & KVL",
+            description: "قوانين كيرشوف للتيار والجهد مع تطبيقات عملية",
+            icon: "⚡",
+            color: "#d97706"
+        },
+        {
+            id: 3,
+            title: "Circuit Analysis and Circuit theorems",
+            description: "نظريات تحليل الدوائر والتحويلات بين النجمية والمثلثية",
+            icon: "🔄",
+            color: "#ea580c"
+        },
+        {
+            id: 4,
+            title: "Alternating Current & Phasors",
+            description: "التيار المتردد والمتجهات الكهربية وتحليلها الرياضي",
+            icon: "🌊",
+            color: "#f59e0b"
+        },
+        {
+            id: 5,
+            title: "AC Circuits",
+            description: "دوائر التيار المتردد الأساسية وتحليل الاستجابة الترددية",
+            icon: "🔋",
+            color: "#fbbf24"
+        },
+        {
+            id: 6,
+            title: "AC Circuit II",
+            description: "دوائر التيار المتردد المتقدمة والرنين في الدوائر",
+            icon: "📈",
+            color: "#eab308"
+        },
+        {
+            id: 7,
+            title: "Basic Diode Behavior",
+            description: "خصائص الدايودات الأساسية وتطبيقاتها في الدوائر",
+            icon: "🔷",
+            color: "#3b82f6"
+        },
+        {
+            id: 8,
+            title: "BJT & FET",
+            description: "الترانزستورات ثنائية القطب والمجال ومبادئ عملها",
+            icon: "💎",
+            color: "#8b5cf6"
+        },
+        {
+            id: 9,
+            title: "OP - AMP",
+            description: "المضخمات العملياتية وتطبيقاتها في الدوائر التناظرية",
+            icon: "🎛️",
+            color: "#10b981"
+        }
+    ];
+
+    // تهيئة البيانات
+    let circuitsProgress = JSON.parse(localStorage.getItem('circuits_exercises_progress')) || {};
+    
+    // دالة إنشاء البطاقات ديناميكياً
+    function createQuizCards() {
+        const grid = document.querySelector('.lectures-section .main-grid');
+        grid.innerHTML = '';
+        
+        QUIZ_DATA.forEach(quiz => {
+            const progress = circuitsProgress[quiz.id] || {};
+            const score = progress.score || 0;
+            const completed = progress.completed || false;
+            const attempts = progress.attempts || 0;
+            const lastAttempt = progress.lastAttempt || null;
+            
+            const card = document.createElement('div');
+            card.className = 'subject-card';
+            card.id = `quiz-card-${quiz.id}`;
+            
+            if (completed) {
+                card.classList.add('starred');
+            }
+            
+            card.innerHTML = `
+                ${completed ? '<div class="completed-badge">✓</div>' : ''}
+                <span class="badge" style="background: ${quiz.color};">Quiz ${quiz.id}</span>
+                <div class="card-icon">${quiz.icon}</div>
+                <h3>${quiz.title}</h3>
+                <p>${quiz.description}</p>
+                
+                <div class="progress-container">
+                    <div class="progress-info">
+                        <span class="progress-label">${attempts > 0 ? 'آخر نتيجة' : 'التقدم'}</span>
+                        <span class="progress-value">${attempts > 0 ? `${score}%` : 'لم يبدأ'}</span>
+                    </div>
+                    <div class="mini-progress">
+                        <div class="mini-progress-fill" id="progress-fill-${quiz.id}" 
+                             style="width: ${score}%; background: ${quiz.color};"></div>
+                    </div>
+                </div>
+                
+                <div class="card-actions">
+                    <button class="btn-card ${completed ? 'completed' : attempts > 0 ? 'started' : ''}" 
+                            onclick="startQuiz(${quiz.id})">
+                        <i class="fas ${completed ? 'fa-redo' : attempts > 0 ? 'fa-play-circle' : 'fa-play'}"></i>
+                        ${completed ? 'إعادة المحاولة' : attempts > 0 ? 'مواصلة التدريب' : 'ابدأ التدريب'}
+                    </button>
+                </div>
+            `;
+            
+            grid.appendChild(card);
+        });
+    }
+    
+    // دالة تحديث الإحصائيات
+    function updateStatistics() {
+        let completedCount = 0;
+        let totalScore = 0;
+        let quizzesWithScore = 0;
+        let totalTime = 0;
+        let lastActivity = null;
+        
+        QUIZ_DATA.forEach(quiz => {
+            const progress = circuitsProgress[quiz.id] || {};
+            const score = progress.score || 0;
+            const completed = progress.completed || false;
+            const timeSpent = progress.timeSpent || 0;
+            
+            if (completed) completedCount++;
+            if (score > 0) {
+                totalScore += score;
+                quizzesWithScore++;
+            }
+            if (timeSpent) totalTime += timeSpent;
+            
+            if (progress.lastAttempt && (!lastActivity || new Date(progress.lastAttempt) > new Date(lastActivity))) {
+                lastActivity = progress.lastAttempt;
+            }
+        });
+        
+        const overallPercentage = Math.round((completedCount / QUIZ_DATA.length) * 100);
+        const averageScore = quizzesWithScore > 0 ? Math.round(totalScore / quizzesWithScore) : 0;
+        
+        // تحديث واجهة المستخدم
+        document.getElementById('total-quizzes').textContent = QUIZ_DATA.length;
+        document.getElementById('completed-quizzes').textContent = completedCount;
+        document.getElementById('average-score').textContent = `${averageScore}%`;
+        document.getElementById('overall-percentage').textContent = `${overallPercentage}%`;
+        document.getElementById('overall-progress-fill').style.width = `${overallPercentage}%`;
+        document.getElementById('completed-count').textContent = `${completedCount}/${QUIZ_DATA.length} تم إكمالها`;
+        document.getElementById('total-time').textContent = `الوقت الإجمالي: ${Math.round(totalTime / 60)} دقيقة`;
+        
+        if (lastActivity) {
+            const date = new Date(lastActivity);
+            document.getElementById('last-activity').textContent = 
+                `آخر نشاط: ${date.toLocaleDateString('ar-EG')}`;
+        }
+        
+        // تغيير لون شريط التقدم حسب النسبة
+        const progressFill = document.getElementById('overall-progress-fill');
+        if (overallPercentage >= 80) {
+            progressFill.style.background = 'linear-gradient(90deg, var(--success), #059669)';
+        } else if (overallPercentage >= 50) {
+            progressFill.style.background = 'linear-gradient(90deg, var(--warning), var(--accent))';
+        } else {
+            progressFill.style.background = 'linear-gradient(90deg, var(--primary), var(--accent))';
+        }
+    }
+    
+    // دالة بدء الكويز
+    function startQuiz(quizId) {
+        const quiz = QUIZ_DATA.find(q => q.id === quizId);
+        if (!quiz) return;
+        
+        // تسجيل محاولة الدخول
+        if (!circuitsProgress[quizId]) {
+            circuitsProgress[quizId] = {};
+        }
+        circuitsProgress[quizId].lastAttempt = new Date().toISOString();
+        circuitsProgress[quizId].attempts = (circuitsProgress[quizId].attempts || 0) + 1;
+        localStorage.setItem('circuits_exercises_progress', JSON.stringify(circuitsProgress));
+        
+        // رسالة تأكيد
+        showNotification(`جاري تحميل Quiz ${quizId}...`, 'info');
+        
+        // محاكاة تحميل ثم الانتقال للصفحة
+        setTimeout(() => {
+            window.location.href = `quiz_circuits.html?lecture=${quizId}`;
+        }, 800);
+    }
+    
+    // دالة إعادة تعيين التقدم
+    function resetProgress() {
+        if (confirm('هل تريد مسح كل تقدمك؟ هذا الإجراء لا يمكن التراجع عنه.')) {
+            circuitsProgress = {};
+            localStorage.removeItem('circuits_exercises_progress');
+            createQuizCards();
+            updateStatistics();
+            showNotification('تم مسح التقدم بنجاح!', 'success');
+            
+            // تحديث الصفحة الرئيسية إذا كانت مفتوحة
+            try {
+                if (window.opener && !window.opener.closed) {
+                    if (typeof window.opener.updateCircuitsProgress === 'function') {
+                        window.opener.updateCircuitsProgress();
+                    }
+                }
+            } catch (e) {}
+        }
+    }
+    
+    // دالة إظهار الإشعارات
+    function showNotification(message, type = 'info') {
+        // إزالة أي إشعار سابق
+        const oldNotification = document.querySelector('.notification');
+        if (oldNotification) oldNotification.remove();
+        
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        notification.innerHTML = `
+            <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+            ${message}
+        `;
+        
+        // إضافة أنماط للإشعار
+        notification.style.cssText = `
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: ${type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#3b82f6'};
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: slideInRight 0.3s ease;
+            max-width: 300px;
+        `;
+        
+        document.body.appendChild(notification);
+        
+        // إزالة الإشعار بعد 3 ثوان
+        setTimeout(() => {
+            notification.style.animation = 'slideOutRight 0.3s ease';
+            setTimeout(() => notification.remove(), 300);
+        }, 3000);
+    }
+    
+    // دالة للتمرير للأعلى
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+    
+    // دالة إظهار ملخص التقدم
+    function showProgressSummary() {
+        const modal = document.getElementById('progressModal');
+        const details = document.getElementById('progressDetails');
+        
+        let html = '<div style="display: grid; gap: 10px;">';
+        
+        QUIZ_DATA.forEach(quiz => {
+            const progress = circuitsProgress[quiz.id] || {};
+            const score = progress.score || 0;
+            const attempts = progress.attempts || 0;
+            const completed = progress.completed || false;
+            
+            html += `
+                <div style="display: flex; justify-content: space-between; align-items: center; 
+                           padding: 10px; background: #f8fafc; border-radius: 8px;">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <span style="color: ${quiz.color}; font-weight: bold;">Quiz ${quiz.id}</span>
+                        <span>${quiz.title}</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <span style="font-weight: bold; color: ${score >= 70 ? '#10b981' : score >= 50 ? '#f59e0b' : '#ef4444'}">
+                            ${score}%
+                        </span>
+                        ${completed ? '<span style="color: #10b981;">✓</span>' : ''}
+                    </div>
+                </div>
+            `;
+        });
+        
+        html += '</div>';
+        details.innerHTML = html;
+        modal.style.display = 'flex';
+    }
+    
+    // دالة إخفاء ملخص التقدم
+    function hideProgressSummary() {
+        document.getElementById('progressModal').style.display = 'none';
+    }
+    
+    // دالة تبديل الوضع الداكن
+    function toggleDarkMode() {
+        document.body.classList.toggle('dark-mode');
+        
+        if (document.body.classList.contains('dark-mode')) {
+            document.body.style.backgroundColor = '#0f172a';
+            document.body.style.color = '#f8fafc';
+            showNotification('تم تفعيل الوضع الداكن', 'info');
+        } else {
+            document.body.style.backgroundColor = '';
+            document.body.style.color = '';
+            showNotification('تم تفعيل الوضع الفاتح', 'info');
+        }
+    }
+    
+    // تهيئة الصفحة
+    document.addEventListener('DOMContentLoaded', function() {
+        // إنشاء البطاقات
+        createQuizCards();
+        
+        // تحديث الإحصائيات
+        updateStatistics();
+        
+        // تحميل أي بيانات إضافية
+        loadAdditionalData();
+        
+        // إضافة أنماط CSS للرسوم المتحركة
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInRight {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            
+            @keyframes slideOutRight {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+            
+            .dark-mode .subject-card,
+            .dark-mode .overall-progress,
+            .dark-mode .welcome-section {
+                background: #1e293b;
+                color: #f8fafc;
+            }
+            
+            .dark-mode .subject-card p,
+            .dark-mode .progress-stats {
+                color: #cbd5e1;
+            }
+            
+            .dark-mode .navbar {
+                background: #1e293b;
+                border-bottom: 1px solid #334155;
+            }
+            
+            .dark-mode .footer {
+                background: #1e293b;
+                border-top: 1px solid #334155;
+            }
+            
+            .dark-mode .action-btn {
+                background: #1e293b;
+                color: #f8fafc;
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // إضافة تأثيرات عند التمرير
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.subject-card').forEach(card => {
+            observer.observe(card);
+        });
+        
+        // تحديث دوري للإحصائيات
+        setInterval(updateStatistics, 5000);
+    });
+    
+    // دالة تحميل بيانات إضافية
+    function loadAdditionalData() {
+        // يمكن إضافة تحميل بيانات إضافية هنا
+        console.log('تم تحميل بنك التدريبات بنجاح!');
+    }
+    
+    // للاستدعاء من صفحات أخرى
+    window.updateCircuitsProgress = function() {
+        circuitsProgress = JSON.parse(localStorage.getItem('circuits_exercises_progress')) || {};
+        createQuizCards();
+        updateStatistics();
+        showNotification('تم تحديث بيانات التقدم!', 'success');
+    };
+    
+    // اختصار لوحة المفاتيح
+    document.addEventListener('keydown', function(e) {
+        // Ctrl + R لإعادة التعيين
+        if (e.ctrlKey && e.key === 'r') {
+            e.preventDefault();
+            resetProgress();
+        }
+        
+        // Esc لإغلاق النافذة المنبثقة
+        if (e.key === 'Escape') {
+            hideProgressSummary();
+        }
+        
+        // رقم من 1-9 لبدء الكويز المقابل
+        if (e.key >= '1' && e.key <= '9') {
+            const quizId = parseInt(e.key);
+            if (quizId <= QUIZ_DATA.length) {
+                startQuiz(quizId);
+            }
+        }
+    });
+    </script>
+</body>
+</html>
