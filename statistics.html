@@ -5,33 +5,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>محتوى مادة الإحصاء | جامعة المنصورة الجديدة</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* إعادة ضبط كاملة */
+        /* --- المتغيرات اللونية المحدثة --- */
+        :root {
+            --primary: #0f172a;      /* كحلي غامق فخم */
+            --secondary: #1e293b;    /* كحلي فاتح */
+            --accent: #0ea5e9;       /* أزرق سماوي مضيء */
+            --accent-dark: #0284c7;  /* أزرق داكن */
+            --gold: #d4af37;         /* ذهبي */
+            --gold-dark: #b8860b;    /* ذهبي داكن */
+            --gold-light: #f7efd2;   /* ذهبي فاتح */
+            --bg: #f8fafc;           /* خلفية هادية */
+            --card-bg: rgba(255, 255, 255, 0.98);
+            --glass-bg: rgba(255, 255, 255, 0.9);
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --white: #ffffff;
+            --danger: #ef4444;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --tut: #8b5cf6;
+            --yt: #ff0000;
+            --border-radius: 20px;
+            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.12);
+            --shadow-gold: 0 8px 25px rgba(212, 175, 55, 0.25);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        /* --- إعادة الضبط الأساسية --- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        html {
+            scroll-behavior: smooth;
         }
         
         body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
             padding-top: 0;
             margin: 0;
-            background: var(--bg);
-            font-family: 'Cairo', sans-serif;
         }
         
-        /* النافبار ثابت */
+        /* --- النافبار المتميز (Glassmorphism Premium) --- */
         .navbar {
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(10px);
-            color: white;
-            padding: 12px 0;
+            background: rgba(15, 23, 42, 0.98);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 0;
             position: fixed;
             top: 0;
             width: 100%;
-            z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            z-index: 9999;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            animation: slideDown 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
         
         .nav-container {
@@ -40,277 +89,610 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 20px;
+            padding: 15px 20px;
         }
         
-        .uni-name { font-weight: 900; font-size: 1.1rem; color: white; }
-        .app-tag { font-size: 0.8rem; color: #0ea5e9; font-weight: 700; }
+        .logo {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
         
-        /* الهيدر */
+        .uni-name {
+            font-weight: 900;
+            font-size: 1.2rem;
+            color: var(--white);
+            letter-spacing: -0.5px;
+        }
+        
+        .app-tag {
+            font-size: 0.9rem;
+            color: var(--accent);
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        /* --- زر الرجوع للرئيسية --- */
+        .btn-home {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(184, 134, 11, 0.1));
+            color: var(--gold);
+            padding: 10px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 0.95rem;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.15);
+        }
+        
+        .btn-home:hover {
+            background: var(--gold);
+            color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+            border-color: var(--gold);
+        }
+        
+        /* --- الهيدر الرئيسي الجديد --- */
+        .hero-content-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 120px 20px 70px;
+            text-align: center;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+            margin-top: 0;
+            clip-path: ellipse(150% 100% at 50% 0%);
+        }
+        
+        .hero-content-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        .hero-content-section::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        /* الخط الذهبي الكامل */
+        .gold-line {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-dark), var(--gold));
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
+            z-index: 5;
+        }
+        
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 900;
+            margin-bottom: 15px;
+            line-height: 1.1;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1.4rem, 3vw, 2rem);
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+        
+        .hero-description {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            color: #e2e8f0;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* --- الحاوية الرئيسية --- */
         .container {
             max-width: 1200px;
-            margin: 100px auto 60px;
+            margin: -30px auto 80px;
             padding: 0 20px;
+            position: relative;
+            z-index: 10;
+            animation: fadeIn 0.8s ease-out 0.6s both;
         }
         
-        /* العنوان */
-        .section-header-container {
-            text-align: center;
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* --- شريط الإحصائيات الجديد --- */
+        .stats-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px;
             margin-bottom: 40px;
-            padding: 10px 0 20px 0;
-            border-bottom: 3px solid #d4af37;
-            width: 100%;
-        }
-
-        .section-title-main {
-            font-size: 2.2rem;
-            font-weight: 900;
-            color: #0f172a;
-            line-height: 1.2;
-        }
-
-        .section-title-sub {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: #64748b;
-            margin-top: 5px;
+            box-shadow: var(--shadow-md);
+            border: 1.5px solid rgba(14, 165, 233, 0.1);
+            animation: slideIn 0.6s ease-out 0.7s both;
+            text-align: center;
         }
         
-        /* الجريد */
+        @keyframes slideIn {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .stats-item {
+            text-align: center;
+            flex: 1;
+            padding: 10px;
+        }
+        
+        .stats-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--gold);
+        }
+        
+        .stats-number {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--primary);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        
+        .stats-label {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: 700;
+        }
+        
+        .stats-separator {
+            width: 2px;
+            height: 50px;
+            background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+            margin: 0 20px;
+        }
+        
+        /* --- شبكة البطاقات المتميزة --- */
         .main-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 25px;
-            margin-top: 20px;
+            gap: 30px;
         }
         
-        /* كروت المحاضرات */
-        .subject-card {
-            background: white;
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 2px solid transparent;
+        /* --- بطاقات المحاضرات الفاخرة --- */
+        .lecture-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 25px 20px;
+            border-radius: var(--border-radius);
             text-align: center;
+            border: 1.5px solid rgba(255, 255, 255, 0.2);
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: cardAppear 0.6s ease-out forwards;
         }
         
-        .subject-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(14, 165, 233, 0.15);
-            border-color: #0ea5e9;
+        @keyframes cardAppear {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
-        /* البادج */
-        .badge {
-            display: inline-block;
-            background: #0f172a;
-            color: #d4af37;
-            padding: 6px 18px;
+        /* تسلسل ظهور البطاقات */
+        .lecture-card:nth-child(1) { animation-delay: 0.1s; }
+        .lecture-card:nth-child(2) { animation-delay: 0.2s; }
+        .lecture-card:nth-child(3) { animation-delay: 0.3s; }
+        .lecture-card:nth-child(4) { animation-delay: 0.4s; }
+        .lecture-card:nth-child(5) { animation-delay: 0.5s; }
+        .lecture-card:nth-child(6) { animation-delay: 0.6s; }
+        .lecture-card:nth-child(7) { animation-delay: 0.7s; }
+        .lecture-card:nth-child(8) { animation-delay: 0.8s; }
+        .lecture-card:nth-child(9) { animation-delay: 0.9s; }
+        .lecture-card:nth-child(10) { animation-delay: 1s; }
+        
+        .lecture-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.1) 0%, transparent 100%);
+            border-radius: 0 0 0 100%;
+            z-index: 1;
+        }
+        
+        .lecture-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent);
+        }
+        
+        /* البادجات المتميزة */
+        .lecture-badge {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--gold);
+            padding: 8px 20px;
             border-radius: 50px;
             font-weight: 900;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             margin-bottom: 20px;
+            align-self: flex-start;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            position: relative;
+            z-index: 2;
             border: 2px solid rgba(212, 175, 55, 0.3);
         }
         
         /* عنوان المحاضرة */
-        .subject-card h3 {
-            color: #0f172a;
+        .lecture-card h3 {
+            color: var(--primary);
             font-size: 1.4rem;
-            font-weight: 800;
+            font-weight: 900;
             margin-bottom: 25px;
-            line-height: 1.4;
+            line-height: 1.3;
+            position: relative;
+            z-index: 2;
+            flex-grow: 1;
         }
         
-        /* أزرار المحتوى */
+        /* --- أزرار المحتوى المتميزة --- */
         .content-actions {
             display: flex;
-            gap: 10px;
-            margin-top: 10px;
-            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 20px;
             justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
         }
         
         .btn-content {
             flex: 1;
+            min-width: 90px;
+            max-width: 110px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            padding: 12px 8px;
-            border-radius: 12px;
-            font-size: 0.85rem;
-            font-weight: 700;
+            padding: 14px 10px;
+            border-radius: 14px;
+            font-size: 0.9rem;
+            font-weight: 800;
             text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: var(--transition);
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            min-width: 90px;
-            max-width: 120px;
+            border: 2px solid transparent;
+            box-shadow: var(--shadow-sm);
         }
         
-        /* ألوان الأزرار */
-        .btn-content.btn-pdf {
-            background: rgba(239, 68, 68, 0.1);
-            color: #ef4444 !important;
+        .btn-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.3), 
+                transparent);
+            transition: left 0.5s ease;
         }
+        
+        .btn-content:hover::before {
+            left: 100%;
+        }
+        
+        /* ألوان الأزرار المتميزة */
+        .btn-content.btn-pdf {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(239, 68, 68, 0.05));
+            color: #ef4444 !important;
+            border-color: rgba(239, 68, 68, 0.2);
+        }
+        
         .btn-content.btn-pdf:hover {
             background: #ef4444;
             color: white !important;
-            box-shadow: 0 8px 20px rgba(239, 68, 68, 0.3);
+            box-shadow: 0 15px 30px rgba(239, 68, 68, 0.3);
+            border-color: #ef4444;
+            transform: translateY(-3px);
         }
         
         .btn-content.btn-tutorial {
-            background: rgba(139, 92, 246, 0.1);
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(139, 92, 246, 0.05));
             color: #8b5cf6 !important;
+            border-color: rgba(139, 92, 246, 0.2);
         }
+        
         .btn-content.btn-tutorial:hover {
             background: #8b5cf6;
             color: white !important;
-            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
+            box-shadow: 0 15px 30px rgba(139, 92, 246, 0.3);
+            border-color: #8b5cf6;
+            transform: translateY(-3px);
         }
         
         .btn-content.btn-video {
-            background: rgba(255, 0, 0, 0.05);
+            background: linear-gradient(135deg, rgba(255, 0, 0, 0.1), rgba(255, 0, 0, 0.05));
             color: #ff0000 !important;
+            border-color: rgba(255, 0, 0, 0.2);
         }
+        
         .btn-content.btn-video:hover {
             background: #ff0000;
             color: white !important;
-            box-shadow: 0 8px 20px rgba(255, 0, 0, 0.3);
+            box-shadow: 0 15px 30px rgba(255, 0, 0, 0.3);
+            border-color: #ff0000;
+            transform: translateY(-3px);
         }
         
         .btn-content.btn-disabled {
-            background: #e2e8f0;
+            background: linear-gradient(135deg, rgba(148, 163, 184, 0.1), rgba(148, 163, 184, 0.05));
             color: #94a3b8 !important;
+            border-color: rgba(148, 163, 184, 0.2);
             cursor: not-allowed;
         }
         
-        /* أيقونة الزرار */
+        .btn-content.btn-disabled:hover {
+            background: linear-gradient(135deg, rgba(148, 163, 184, 0.1), rgba(148, 163, 184, 0.05));
+            color: #94a3b8 !important;
+            box-shadow: none;
+            transform: none;
+            border-color: rgba(148, 163, 184, 0.2);
+        }
+        
+        /* أيقونات الأزرار */
         .btn-content span {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             transition: transform 0.3s ease;
         }
+        
         .btn-content:hover span {
             transform: rotate(10deg) scale(1.1);
         }
         
-        /* مراجعة الميدترم */
+        /* كارت المراجعة الخاص */
+        .review-card {
+            border: 2px solid var(--gold);
+            background: linear-gradient(135deg, rgba(255, 251, 235, 0.9), rgba(254, 243, 199, 0.8));
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .review-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), transparent);
+        }
+        
+        .review-card .lecture-badge {
+            background: var(--gold);
+            color: var(--primary);
+            border-color: var(--gold-dark);
+        }
+        
+        .review-card h3 {
+            color: #92400e;
+        }
+        
         .review-notice {
-            margin-top: 15px;
-            padding: 15px;
-            background: linear-gradient(135deg, #fffbeb, #fef3c7);
-            border-radius: 15px;
-            border-right: 5px solid #f59e0b;
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 18px;
+            border-right: 6px solid var(--warning);
+            position: relative;
+            z-index: 2;
         }
         
         .review-notice p {
             color: #92400e;
-            font-size: 0.95rem;
-            font-weight: 700;
-            line-height: 1.6;
+            font-size: 1rem;
+            font-weight: 800;
+            line-height: 1.7;
+            text-align: right;
         }
         
-        /* الفوتر */
+        /* --- الفوتر المعدل --- */
         .footer {
             text-align: center;
-            padding: 25px;
-            color: #64748b;
+            padding: 35px 20px;
+            color: var(--text-muted);
             font-size: 0.9rem;
-            background: #f8fafc;
-            margin-top: 60px;
-            border-top: 1px solid #e2e8f0;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(226, 232, 240, 0.8);
+            margin-top: 80px;
         }
         
-        /* زر الرجوع للرئيسية */
-        .btn-enter {
-            background: rgba(212, 175, 55, 0.2);
-            color: #b8860b;
-            padding: 8px 20px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-            border: 2px solid rgba(212, 175, 55, 0.3);
-            transition: all 0.3s;
-        }
-        
-        .btn-enter:hover {
-            background: #d4af37;
-            color: #0f172a;
-            transform: scale(1.05);
-        }
-        
-        /* تحسينات للموبايل */
+        /* --- تحسينات للجوال --- */
         @media (max-width: 768px) {
+            .nav-container {
+                padding: 12px 15px;
+            }
+            
+            .uni-name {
+                font-size: 1rem;
+            }
+            
+            .app-tag {
+                font-size: 0.8rem;
+            }
+            
+            .btn-home {
+                padding: 8px 18px;
+                font-size: 0.85rem;
+            }
+            
+            .hero-content-section {
+                padding: 100px 15px 50px;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.4rem;
+            }
+            
             .container {
-                margin: 90px auto 40px;
+                margin: -20px auto 50px;
                 padding: 0 15px;
             }
             
-            .section-title-main {
-                font-size: 1.8rem;
+            .stats-bar {
+                flex-direction: column;
+                gap: 20px;
+                padding: 20px;
             }
             
-            .section-title-sub {
-                font-size: 1.5rem;
+            .stats-item {
+                width: 100%;
+                padding: 15px 0;
+            }
+            
+            .stats-separator {
+                width: 80%;
+                height: 2px;
+                margin: 10px auto;
+                background: linear-gradient(to right, transparent, var(--gold), transparent);
+            }
+            
+            .stats-number {
+                font-size: 2.2rem;
             }
             
             .main-grid {
                 display: flex;
                 flex-direction: column;
-                gap: 20px;
+                gap: 25px;
             }
             
-            .subject-card {
-                width: 100%;
-                padding: 20px;
+            .lecture-card {
+                padding: 25px 20px;
             }
             
             .content-actions {
                 flex-direction: row;
                 justify-content: space-between;
-                gap: 8px;
+                gap: 10px;
             }
             
             .btn-content {
-                min-width: 80px;
+                min-width: 85px;
                 max-width: none;
                 flex: 1;
-                padding: 10px 6px;
-                font-size: 0.8rem;
+                padding: 12px 8px;
+                font-size: 0.85rem;
             }
             
             .btn-content span {
-                font-size: 1rem;
+                font-size: 1.1rem;
             }
             
-            .subject-card h3 {
-                font-size: 1.2rem;
+            .lecture-card h3 {
+                font-size: 1.3rem;
             }
             
-            .badge {
-                font-size: 0.85rem;
-                padding: 5px 15px;
+            .lecture-badge {
+                font-size: 0.9rem;
+                padding: 7px 18px;
             }
         }
         
-        /* لشاشات صغيرة جداً */
-        @media (max-width: 400px) {
+        /* --- لشاشات صغيرة جداً --- */
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .hero-description {
+                font-size: 0.95rem;
+            }
+            
             .content-actions {
                 flex-direction: column;
-                gap: 10px;
+                gap: 12px;
             }
             
             .btn-content {
                 width: 100%;
                 max-width: 100%;
-                padding: 12px;
+                padding: 14px;
             }
             
             .nav-container {
-                padding: 0 10px;
+                padding: 0 12px;
             }
             
             .uni-name {
@@ -318,92 +700,176 @@
             }
             
             .app-tag {
-                font-size: 0.7rem;
+                font-size: 0.75rem;
             }
             
-            .btn-enter {
-                padding: 6px 15px;
-                font-size: 0.85rem;
+            .btn-home {
+                padding: 7px 16px;
+                font-size: 0.8rem;
+            }
+            
+            .stats-number {
+                font-size: 2rem;
+            }
+            
+            .stats-label {
+                font-size: 0.9rem;
             }
         }
         
-        /* ترتيب المحاضرات في الموبايل */
-        @media (max-width: 768px) {
-            .subject-card:nth-child(1) { order: 1; }
-            .subject-card:nth-child(2) { order: 2; }
-            .subject-card:nth-child(3) { order: 3; }
-            .subject-card:nth-child(4) { order: 4; }
-            .subject-card:nth-child(5) { order: 5; }
-            .subject-card:nth-child(6) { order: 6; }
-            .subject-card:nth-child(7) { order: 7; }
-            .subject-card:nth-child(8) { order: 8; }
-            .subject-card:nth-child(9) { order: 9; }
-            .subject-card:nth-child(10) { order: 10; }
+        /* --- تحسينات للوضع الداكن --- */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #0f172a;
+                --card-bg: rgba(30, 41, 59, 0.9);
+                --glass-bg: rgba(30, 41, 59, 0.95);
+                --text-main: #f1f5f9;
+                --text-muted: #cbd5e1;
+            }
+            
+            body {
+                background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            }
+            
+            .lecture-card {
+                border-color: rgba(255, 255, 255, 0.05);
+            }
+            
+            .navbar {
+                background: rgba(15, 23, 42, 0.98);
+                border-bottom-color: rgba(255, 255, 255, 0.05);
+            }
+            
+            .stats-bar {
+                background: rgba(30, 41, 59, 0.8);
+                border-color: rgba(14, 165, 233, 0.1);
+            }
+            
+            .footer {
+                background: rgba(15, 23, 42, 0.9);
+                border-top-color: rgba(255, 255, 255, 0.05);
+            }
+            
+            .review-card {
+                background: linear-gradient(135deg, rgba(120, 53, 15, 0.2), rgba(69, 26, 3, 0.2));
+            }
+            
+            .review-notice {
+                background: rgba(30, 41, 59, 0.7);
+            }
+            
+            .gold-line {
+                box-shadow: 0 4px 20px rgba(212, 175, 55, 0.6);
+            }
+        }
+        
+        /* --- تأثير التحميل السريع --- */
+        #loader {
+            opacity: 0;
+            transition: opacity 0.2s ease-out;
         }
     </style>
 </head>
 <body class="content-page">
+    <!-- النافبار -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
                 <span class="uni-name">جامعة المنصورة الجديدة</span>
-                <span class="app-tag">مادة الاحتمالات والإحصاء</span>
+                <span class="app-tag">مادة الاحتمالات والإحصاء 📊</span>
             </div>
-            <a href="index.html" class="btn-enter">🏠 الرئيسية</a>
+            <a href="index.html" class="btn-home">
+                <i class="fas fa-home"></i> الرئيسية
+            </a>
         </div>
     </nav>
 
+    <!-- الهيدر الرئيسي -->
+    <header class="hero-content-section">
+        <div class="gold-line"></div>
+        <h1 class="hero-title">📚 محتوى المادة</h1>
+        <div class="hero-subtitle">مادة الاحصاء والاحتمالات</div>
+        <p class="hero-description">اختر المحاضرة المناسبة لتبدأ رحلتك التعليمية</p>
+    </header>
+
+    <!-- الحاوية الرئيسية -->
     <main class="container">
-        <div class="section-header-container">
-            <div class="section-title-main">📚 قائمة المحاضرات</div>
-            <div class="section-title-sub">والتمارين</div>
+        <!-- شريط الإحصائيات الجديد -->
+        <div class="stats-bar">
+            <div class="stats-item">
+                <div class="stats-icon">🎓</div>
+                <span class="stats-number">10</span>
+                <span class="stats-label">محاضرة</span>
+            </div>
+            
+            <div class="stats-separator"></div>
+            
+            <div class="stats-item">
+                <div class="stats-icon">🎬</div>
+                <span class="stats-number">9</span>
+                <span class="stats-label">فيديوهات</span>
+            </div>
+            
+            <div class="stats-separator"></div>
+            
+            <div class="stats-item">
+                <div class="stats-icon">📝</div>
+                <span class="stats-number">8</span>
+                <span class="stats-label">تيتوريالز</span>
+            </div>
         </div>
-        
+
+        <!-- شبكة البطاقات -->
         <div class="main-grid">
             
-            <div class="subject-card">
-                <span class="badge">Lec 01</span>
-                <h3>Probability</h3>
+            <!-- Counting Principals -->
+            <div class="lecture-card">
+                <span class="lecture-badge">Lec 01</span>
+                <h3>Counting Principals</h3>
                 <div class="content-actions">
                     <a href="lec1.pdf" target="_blank" class="btn-content btn-pdf"><span>📄</span> الشرح</a>
                     <a href="tut1.pdf" target="_blank" class="btn-content btn-tutorial"><span>📝</span> تيتوريال</a>
-                    <a href="https://youtu.be/GmJJ2iZz08c?si=r9PHBkjre88xD3fh" target="_blank" class="btn-content btn-video"><span>🎬</span> الفيديو</a>
-                </div>
-            </div>
-
-            <div class="subject-card">
-                <span class="badge">Lec 02</span>
-                <h3>Counting Principals</h3>
-                <div class="content-actions">
-                    <a href="lec2.pdf" target="_blank" class="btn-content btn-pdf"><span>📄</span> الشرح</a>
-                    <a href="tut2.pdf" target="_blank" class="btn-content btn-tutorial"><span>📝</span> تيتوريال</a>
                     <a href="https://youtu.be/NrdCDmSAn7c?si=A3zZra9t0Zo7L9Hu" target="_blank" class="btn-content btn-video"><span>🎬</span> الفيديو</a>
                 </div>
             </div>
 
-            <div class="subject-card">
-                <span class="badge">Lec 03</span>
-                <h3>Bayes' Theorem & RV</h3>
+            <!-- Probability -->
+            <div class="lecture-card">
+                <span class="lecture-badge">Lec 02</span>
+                <h3>Probability</h3>
                 <div class="content-actions">
-                    <a href="lec3.pdf" target="_blank" class="btn-content btn-pdf"><span>📄</span> الشرح</a>
-                    <a href="tut3.pdf" target="_blank" class="btn-content btn-tutorial"><span>📝</span> تيتوريال</a>
-                    <a href="https://youtu.be/zWDzNUTfk9s?si=Ryk_1qs1-fPNQ_3H" target="_blank" class="btn-content btn-video"><span>🎬</span> الفيديو</a>
+                    <a href="lec2.pdf" target="_blank" class="btn-content btn-pdf"><span>📄</span> الشرح</a>
+                    <a href="tut2.pdf" target="_blank" class="btn-content btn-tutorial"><span>📝</span> تيتوريال</a>
+                    <a href="https://youtu.be/GmJJ2iZz08c?si=r9PHBkjre88xD3fh" target="_blank" class="btn-content btn-video"><span>🎬</span> الفيديو</a>
                 </div>
             </div>
 
-            <div class="subject-card">
-                <span class="badge">Lec 04</span>
+            <!-- Random Variable -->
+            <div class="lecture-card">
+                <span class="lecture-badge">Lec 03</span>
                 <h3>Random Variable</h3>
                 <div class="content-actions">
-                    <a href="lec4.pdf" target="_blank" class="btn-content btn-pdf"><span>📄</span> الشرح</a>
-                    <a href="tut4.pdf" target="_blank" class="btn-content btn-tutorial"><span>📝</span> تيتوريال</a>
+                    <a href="lec3.pdf" target="_blank" class="btn-content btn-pdf"><span>📄</span> الشرح</a>
+                    <a href="tut3.pdf" target="_blank" class="btn-content btn-tutorial"><span>📝</span> تيتوريال</a>
                     <a href="https://youtu.be/LFYlH2RPitg?si=qRWYZx4gwHYvP753" target="_blank" class="btn-content btn-video"><span>🎬</span> الفيديو</a>
                 </div>
             </div>
 
-            <div class="subject-card">
-                <span class="badge">Lec 05</span>
-                <h3>Special Discrete Dist.</h3>
+            <!-- Bayes' Theorem & RV -->
+            <div class="lecture-card">
+                <span class="lecture-badge">Lec 04</span>
+                <h3>Bayes' Theorem & RV</h3>
+                <div class="content-actions">
+                    <a href="lec4.pdf" target="_blank" class="btn-content btn-pdf"><span>📄</span> الشرح</a>
+                    <a href="tut4.pdf" target="_blank" class="btn-content btn-tutorial"><span>📝</span> تيتوريال</a>
+                    <a href="https://youtu.be/zWDzNUTfk9s?si=Ryk_1qs1-fPNQ_3H" target="_blank" class="btn-content btn-video"><span>🎬</span> الفيديو</a>
+                </div>
+            </div>
+
+            <!-- Special Discrete Dist -->
+            <div class="lecture-card">
+                <span class="lecture-badge">Lec 05</span>
+                <h3>Special Discrete Dist</h3>
                 <div class="content-actions">
                     <a href="lec5.pdf" target="_blank" class="btn-content btn-pdf"><span>📄</span> الشرح</a>
                     <a href="tut5.pdf" target="_blank" class="btn-content btn-tutorial"><span>📝</span> تيتوريال</a>
@@ -411,16 +877,18 @@
                 </div>
             </div>
 
-            <div class="subject-card" style="border: 2px solid #d4af37; background: linear-gradient(135deg, #fffbeb, #fef3c7);">
-                <span class="badge" style="background: #d4af37; color: #0f172a; border-color: #b8860b;">Review</span>
-                <h3 style="color: #92400e;">Midterm Review</h3>
+            <!-- مراجعة الميدترم -->
+            <div class="lecture-card review-card">
+                <span class="lecture-badge">Review</span>
+                <h3>Midterm Review</h3>
                 <div class="review-notice">
                     <p><b>مراجعة شاملة للميدترم</b><br>المحاضرة السادسة مراجعة للميدترم وسيتم اضافة اسئلة الميدترم قريباً</p>
                 </div>
             </div>
 
-            <div class="subject-card">
-                <span class="badge">Lec 07</span>
+            <!-- Continuous Random -->
+            <div class="lecture-card">
+                <span class="lecture-badge">Lec 07</span>
                 <h3>Continuous Random</h3>
                 <div class="content-actions">
                     <a href="lec7.pdf" target="_blank" class="btn-content btn-pdf"><span>📄</span> الشرح</a>
@@ -429,8 +897,9 @@
                 </div>
             </div>
 
-            <div class="subject-card">
-                <span class="badge">Lec 08</span>
+            <!-- Normal Distribution -->
+            <div class="lecture-card">
+                <span class="lecture-badge">Lec 08</span>
                 <h3>Normal Distribution</h3>
                 <div class="content-actions">
                     <a href="lec8.pdf" target="_blank" class="btn-content btn-pdf"><span>📄</span> الشرح</a>
@@ -439,63 +908,435 @@
                 </div>
             </div>
 
-            <div class="subject-card">
-                <span class="badge">Lec 09</span>
-                <h3>Joint Probability</h3>
+            <!-- Statistics -->
+            <div class="lecture-card">
+                <span class="lecture-badge">Lec 09</span>
+                <h3>Statistics</h3>
                 <div class="content-actions">
                     <a href="lec9.pdf" target="_blank" class="btn-content btn-pdf"><span>📄</span> الشرح</a>
-                    <a href="tut9.pdf" target="_blank" class="btn-content btn-tutorial"><span>📝</span> تيتوريال</a>
-                    <a href="https://youtu.be/lR4i75_kLsA?si=5-TuBBYpure2Snf_" target="_blank" class="btn-content btn-video"><span>🎬</span> الفيديو</a>
+                    <button class="btn-content btn-disabled"><span>🚫</span> لا يتوفر</button>
+                    <a href="https://youtu.be/CL-fAMiysnk?si=SFdcnEClQhtUYmUT" target="_blank" class="btn-content btn-video"><span>🎬</span> الفيديو</a>
                 </div>
             </div>
 
-            <div class="subject-card">
-                <span class="badge">Lec 10</span>
-                <h3>Statistics</h3>
+            <!-- Joint Probability -->
+            <div class="lecture-card">
+                <span class="lecture-badge">Lec 10</span>
+                <h3>Joint Probability</h3>
                 <div class="content-actions">
                     <a href="lec10.pdf" target="_blank" class="btn-content btn-pdf"><span>📄</span> الشرح</a>
-                    <button class="btn-content btn-disabled"><span>🚫</span> لا يتوفر</button>
-                    <a href="https://youtu.be/CL-fAMiysnk?si=SFdcnEClQhtUYmUT" target="_blank" class="btn-content btn-video"><span>🎬</span> الفيديو</a>
+                    <a href="tut10.pdf" target="_blank" class="btn-content btn-tutorial"><span>📝</span> تيتوريال</a>
+                    <a href="https://youtu.be/lR4i75_kLsA?si=5-TuBBYpure2Snf_" target="_blank" class="btn-content btn-video"><span>🎬</span> الفيديو</a>
                 </div>
             </div>
 
         </div>
     </main>
 
+    <!-- الفوتر -->
     <footer class="footer">
         <p>جميع الحقوق محفوظة - بوابة الطالب الذكية © 2026</p>
     </footer>
     
     <script>
-    const contentButtons = document.querySelectorAll('.btn-content:not(.btn-disabled)');
-    let completed = JSON.parse(localStorage.getItem('stats_progress')) || [];
-
-    contentButtons.forEach((btn, index) => {
-        btn.addEventListener('click', () => {
-            if (!completed.includes(index)) {
-                completed.push(index);
-                localStorage.setItem('stats_progress', JSON.stringify(completed));
-                
-                // إضافة مؤشر تفاعلي
-                btn.style.transform = 'scale(0.95)';
-                btn.style.backgroundColor = '#22c55e';
-                btn.style.color = 'white !important';
-                
+    // === التحميل السريع ===
+    (function() {
+        const fastHide = () => {
+            const loader = document.getElementById('loader');
+            if (loader) {
+                loader.style.opacity = '0';
                 setTimeout(() => {
-                    btn.style.transform = '';
-                    btn.style.backgroundColor = '';
-                    btn.style.color = '';
-                }, 300);
+                    loader.style.display = 'none';
+                }, 200);
+            }
+        };
+
+        if (document.readyState === 'interactive' || document.readyState === 'complete') {
+            fastHide();
+        } else {
+            document.addEventListener('DOMContentLoaded', fastHide);
+        }
+    })();
+
+    // === تهيئة الصفحة ===
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('📊 تحميل صفحة الإحصاء...');
+        document.body.style.opacity = '1';
+        
+        // تعريف الأرقام الفعلية للمادة
+        const actualStats = {
+            lectures: 10,     // إجمالي المحاضرات
+            videos: 9,        // إجمالي الفيديوهات
+            tutorials: 8      // إجمالي التيتوريالز
+        };
+        
+        // تعيين الأرقام الفعلية في شريط الإحصائيات
+        const statsNumbers = document.querySelectorAll('.stats-number');
+        if (statsNumbers.length >= 3) {
+            statsNumbers[0].textContent = actualStats.lectures;
+            statsNumbers[1].textContent = actualStats.videos;
+            statsNumbers[2].textContent = actualStats.tutorials;
+        }
+        
+        // تعيين data-item لكل زر محتوى
+        document.querySelectorAll('.btn-content').forEach((btn, index) => {
+            // استخراج رقم المحاضرة من البادج
+            const card = btn.closest('.lecture-card');
+            const badge = card.querySelector('.lecture-badge');
+            if (badge) {
+                const lectureNum = badge.textContent.replace('Lec ', '').replace('Review', '6');
+                const btnType = btn.classList.contains('btn-pdf') ? 'pdf' : 
+                               btn.classList.contains('btn-tutorial') ? 'tut' : 
+                               btn.classList.contains('btn-video') ? 'vid' : 'other';
+                btn.setAttribute('data-item', `stat_lec${lectureNum}_${btnType}`);
+            }
+        });
+        
+        // ظهور متتالي للبطاقات
+        const cards = document.querySelectorAll('.lecture-card');
+        cards.forEach((card, index) => {
+            setTimeout(() => {
+                card.style.animationDelay = `${index * 0.1}s`;
+            }, 100);
+        });
+        
+        // تحديث علامات الإكمال عند التحميل
+        updateCompletionMarks();
+        
+        // عرض بيانات التقدم الحالية
+        const statData = JSON.parse(localStorage.getItem('stat_progress')) || [];
+        console.log('📊 بيانات الإحصاء الحالية:', statData);
+        console.log('📊 عدد العناصر المكتملة:', statData.length);
+        
+        // عرض تقدم المستخدم في مكان آخر (اختياري)
+        displayUserProgress(statData.length, actualStats);
+    });
+
+    // === تتبع التقدم ===
+    // تتبع النقر على جميع أزرار المحتوى
+    document.querySelectorAll('.btn-content').forEach((btn) => {
+        btn.addEventListener('click', function(e) {
+            // إذا كان الزر معطلاً، لا تفعل شيئاً
+            if (this.classList.contains('btn-disabled')) {
+                e.preventDefault();
+                return;
+            }
+            
+            const itemId = this.getAttribute('data-item');
+            if (!itemId) {
+                console.warn('⚠️ الزر لا يحتوي على data-item:', this);
+                return;
+            }
+            
+            console.log(`🖱️ نقر على زر: ${itemId}`);
+            
+            // الحصول على البيانات الحالية
+            let completedStat = [];
+            try {
+                const stored = localStorage.getItem('stat_progress');
+                completedStat = stored ? JSON.parse(stored) : [];
+                
+                if (!Array.isArray(completedStat)) {
+                    console.warn('⚠️ بيانات stat_progress غير صالحة، إعادة تعيين...');
+                    completedStat = [];
+                }
+            } catch (error) {
+                console.error('❌ خطأ في قراءة localStorage:', error);
+                completedStat = [];
+            }
+            
+            // إضافة العنصر إذا لم يكن موجوداً
+            if (!completedStat.includes(itemId)) {
+                completedStat.push(itemId);
+                console.log(`✅ تم إضافة: ${itemId}`);
+                
+                try {
+                    localStorage.setItem('stat_progress', JSON.stringify(completedStat));
+                    console.log(`💾 تم حفظ البيانات: ${completedStat.length} عناصر`);
+                } catch (error) {
+                    console.error('❌ خطأ في حفظ localStorage:', error);
+                }
+                
+                // تأثير بصري
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 200);
+                
+                // إضافة علامة ✓ على الزر
+                if (!this.querySelector('.completed-check')) {
+                    const checkIcon = document.createElement('span');
+                    checkIcon.className = 'completed-check';
+                    checkIcon.innerHTML = ' ✓';
+                    checkIcon.style.color = '#22c55e';
+                    checkIcon.style.fontWeight = 'bold';
+                    checkIcon.style.fontSize = '1.2rem';
+                    this.appendChild(checkIcon);
+                }
+                
+                // تحديث علامات الإكمال
+                updateCompletionMarks();
+                
+                // تحديث الصفحة الرئيسية
+                updateParentProgress();
+                
+                // إظهار إشعار صغير
+                showNotification('تم تسجيل تقدمك في المادة!');
+                
+                // عرض تقدم المستخدم (اختياري)
+                displayUserProgress(completedStat.length);
+            } else {
+                console.log(`ℹ️ العنصر موجود مسبقاً: ${itemId}`);
             }
         });
     });
-    
-    // تحديث شريط التقدم في الصفحة الرئيسية عند العودة
-    window.addEventListener('beforeunload', function() {
-        if (window.opener && !window.opener.closed) {
-            window.opener.updateIndexProgress();
+
+    // === تحديث العلامات على البطاقات ===
+    function updateCompletionMarks() {
+        let completedStat = [];
+        try {
+            const stored = localStorage.getItem('stat_progress');
+            completedStat = stored ? JSON.parse(stored) : [];
+        } catch (error) {
+            console.error('❌ خطأ في قراءة البيانات:', error);
+            completedStat = [];
         }
+        
+        console.log('🔍 تحديث العلامات، عدد العناصر:', completedStat.length);
+        
+        // تحديث كل بطاقة
+        document.querySelectorAll('.lecture-card').forEach(card => {
+            const badge = card.querySelector('.lecture-badge');
+            if (!badge) return;
+            
+            const cardButtons = card.querySelectorAll('.btn-content:not(.btn-disabled)');
+            let completedInCard = 0;
+            let totalInCard = cardButtons.length;
+            
+            cardButtons.forEach(btn => {
+                const itemId = btn.getAttribute('data-item');
+                if (itemId && completedStat.includes(itemId)) {
+                    completedInCard++;
+                    // إضافة علامة ✓
+                    if (!btn.querySelector('.completed-check')) {
+                        const checkIcon = document.createElement('span');
+                        checkIcon.className = 'completed-check';
+                        checkIcon.innerHTML = ' ✓';
+                        checkIcon.style.color = '#22c55e';
+                        checkIcon.style.fontWeight = 'bold';
+                        checkIcon.style.fontSize = '1.2rem';
+                        btn.appendChild(checkIcon);
+                    }
+                }
+            });
+            
+            // إذا اكتملت كل العناصر في البطاقة
+            if (completedInCard > 0 && completedInCard === totalInCard) {
+                card.style.borderColor = '#22c55e';
+                card.style.boxShadow = '0 10px 30px rgba(34, 197, 94, 0.2)';
+                
+                // إضافة علامة مكتملة
+                if (!card.querySelector('.card-completed-badge')) {
+                    const completedBadge = document.createElement('div');
+                    completedBadge.className = 'card-completed-badge';
+                    completedBadge.innerHTML = '<i class="fas fa-check-circle"></i> مكتملة';
+                    completedBadge.style.position = 'absolute';
+                    completedBadge.style.top = '15px';
+                    completedBadge.style.left = '15px';
+                    completedBadge.style.background = '#22c55e';
+                    completedBadge.style.color = 'white';
+                    completedBadge.style.padding = '5px 12px';
+                    completedBadge.style.borderRadius = '20px';
+                    completedBadge.style.fontSize = '0.8rem';
+                    completedBadge.style.fontWeight = 'bold';
+                    completedBadge.style.zIndex = '3';
+                    card.appendChild(completedBadge);
+                }
+            }
+        });
+    }
+
+    // === عرض تقدم المستخدم (اختياري) ===
+    function displayUserProgress(completedCount, actualStats = null) {
+        // يمكنك استخدام هذه الدالة لعرض تقدم المستخدم في مكان آخر
+        // على سبيل المثال، في الزاوية العلوية اليسرى أو في تذييل الصفحة
+        
+        // إذا أردت إضافة مكان لعرض تقدم المستخدم، أضف هذا div في HTML
+        // <div id="user-progress-display" class="user-progress"></div>
+        
+        const progressDisplay = document.getElementById('user-progress-display');
+        if (progressDisplay) {
+            const totalItems = actualStats ? (actualStats.lectures * 3) : 29; // تقدير إجمالي العناصر
+            const percentage = Math.round((completedCount / totalItems) * 100);
+            
+            progressDisplay.innerHTML = `
+                <div style="text-align: center; padding: 10px; background: linear-gradient(135deg, #0ea5e9, #0284c7); color: white; border-radius: 10px; margin: 10px;">
+                    <div style="font-size: 0.9rem; opacity: 0.9;">تقدمك الشخصي</div>
+                    <div style="font-size: 1.5rem; font-weight: bold;">${percentage}%</div>
+                    <div style="font-size: 0.8rem; opacity: 0.8;">${completedCount} من ${totalItems} عنصر</div>
+                </div>
+            `;
+        }
+    }
+
+    // === إظهار إشعار ===
+    function showNotification(message) {
+        // إنشاء عنصر الإشعار
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #0ea5e9, #0284c7);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(14, 165, 233, 0.3);
+            z-index: 10000;
+            font-weight: bold;
+            animation: slideInNotification 0.3s ease;
+            max-width: 300px;
+            text-align: center;
+        `;
+        
+        notification.innerHTML = `<i class="fas fa-chart-line" style="margin-left: 8px;"></i> ${message}`;
+        document.body.appendChild(notification);
+        
+        // إزالة الإشعار بعد 3 ثوان
+        setTimeout(() => {
+            notification.style.animation = 'slideOutNotification 0.3s ease';
+            setTimeout(() => {
+                document.body.removeChild(notification);
+            }, 300);
+        }, 3000);
+    }
+
+    // === أنماط CSS للرسوم المتحركة ===
+    const notificationStyles = document.createElement('style');
+    notificationStyles.textContent = `
+        @keyframes slideInNotification {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideOutNotification {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+        
+        /* ستايل إضافي لعرض تقدم المستخدم */
+        .user-progress {
+            position: fixed;
+            top: 80px;
+            left: 20px;
+            z-index: 999;
+            max-width: 150px;
+        }
+    `;
+    document.head.appendChild(notificationStyles);
+
+    // === تحديث الصفحة الرئيسية ===
+    function updateParentProgress() {
+        console.log('🔄 محاولة تحديث الصفحة الرئيسية...');
+        
+        try {
+            // محاولة استخدام opener إذا كانت الصفحة مفتوحة من index
+            if (window.opener && !window.opener.closed) {
+                const parent = window.opener;
+                console.log('👨‍👦 الصفحة الرئيسية مفتوحة عبر opener');
+                
+                // محاولة استدعاء الدوال المختلفة
+                if (typeof parent.updateSubjectProgress === 'function') {
+                    parent.updateSubjectProgress('stat');
+                    console.log('✅ تم استدعاء updateSubjectProgress');
+                } else if (typeof parent.updateStatProgress === 'function') {
+                    parent.updateStatProgress();
+                    console.log('✅ تم استدعاء updateStatProgress');
+                } else if (typeof parent.refreshAllProgress === 'function') {
+                    parent.refreshAllProgress();
+                    console.log('✅ تم استدعاء refreshAllProgress');
+                } else {
+                    console.warn('⚠️ لم يتم العثور على دوال التقد في الصفحة الرئيسية');
+                }
+            } else {
+                console.log('ℹ️ الصفحة الرئيسية غير متاحة عبر opener');
+                
+                // محاولة استخدام localStorage كبديل
+                setTimeout(() => {
+                    window.localStorage.setItem('force_refresh', Date.now().toString());
+                    console.log('💾 تم تعيين علامة التحديث في localStorage');
+                }, 500);
+            }
+        } catch (e) {
+            console.log('❌ خطأ في تحديث الصفحة الرئيسية:', e);
+            
+            // بديل: تخزين علامة لتحديث الصفحة الرئيسية عند العودة
+            window.localStorage.setItem('stat_updated', Date.now().toString());
+            console.log('💾 تم تخزين علامة التحديث');
+        }
+    }
+
+    // === تأثيرات إضافية ===
+    document.querySelectorAll('.lecture-card').forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-5px)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = '';
+        });
     });
-    </script>
+
+    // === تحديث عند الخروج ===
+    window.addEventListener('beforeunload', function() {
+        console.log('👋 مغادرة صفحة الإحصاء...');
+        updateParentProgress();
+        updateCompletionMarks();
+    });
+    
+    // === تحديث البيانات عند العودة ===
+    window.addEventListener('pageshow', () => {
+        console.log('↩️ العودة لصفحة الإحصاء');
+        updateCompletionMarks();
+    });
+    
+    // === دالة اختبار ===
+    window.testStatItems = function() {
+        console.log('🧪 اختبار عناصر الإحصاء...');
+        
+        // إضافة عناصر تجريبية
+        let statProgress = JSON.parse(localStorage.getItem('stat_progress')) || [];
+        const testItems = ['stat_lec1_pdf', 'stat_lec1_vid', 'stat_lec2_tut'];
+        
+        testItems.forEach(item => {
+            if (!statProgress.includes(item)) {
+                statProgress.push(item);
+                console.log(`✅ تم إضافة: ${item}`);
+            }
+        });
+        
+        localStorage.setItem('stat_progress', JSON.stringify(statProgress));
+        console.log(`📊 العدد النهائي: ${statProgress.length} عناصر`);
+        
+        updateCompletionMarks();
+        updateParentProgress();
+        
+        // إظهار إشعار
+        showNotification('تم إضافة عناصر تجريبية للاختبار!');
+    };
+</script>
+
 </body>
-                        </html>
+</html>
